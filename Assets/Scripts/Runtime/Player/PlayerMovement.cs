@@ -5,11 +5,12 @@ namespace Runtime.Player
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : MonoBehaviour
     {
-        public  CharacterController controller;
+        [SerializeField] private  CharacterController controller;
+        [SerializeField] private float gravity = 9.81f;
+        [SerializeField] private float playerSpeed = 5.0f;
+
         private Vector3 _playerVelocity;
         private bool _isGrounded;
-        private float playerSpeed = 5.0f;
-        private float gravityValue = -9.81f;
 
         void Update()
         {
@@ -27,7 +28,7 @@ namespace Runtime.Player
                 gameObject.transform.forward = move;
             }
 
-            _playerVelocity.y += gravityValue * Time.deltaTime;
+            _playerVelocity.y += -gravity * Time.deltaTime;
             controller.Move(_playerVelocity * Time.deltaTime);
         }
     }
