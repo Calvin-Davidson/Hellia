@@ -16,7 +16,7 @@ namespace Runtime.Movables
         private static readonly float RotationTolerance = 20;
         private static readonly int MoveDistance = 4;
 
-        public TryPushTo(Vector3 direction, GameObject collidedObject)
+        public void TryPushTo(Vector3 direction, GameObject collidedObject)
         {
             Collider[] colliders = new Collider[1];
             int collisionCount = Physics.OverlapBoxNonAlloc(transform.position + direction, blockSize, colliders);
