@@ -10,24 +10,53 @@ namespace Runtime.Movables
         [SerializeField] private float cornerTolerance;
         [SerializeField] private LayerMask pushableByLayers;
         [SerializeField] private bool shouldObjectLookAtMe = false;
+        [SerializeField, Range(1, 2)] private int maxPushableAtOnce = 1;
 
 
         private static readonly float RotationTolerance = 20;
         private static readonly int MoveDistance = 4;
 
-        public void TryPushTo(Vector3 direction, GameObject collidedObject)
+        public bool TryPushTo(Vector3 direction, GameObject collidedObject)
         {
-            int colliders = Physics.OverlapBoxNonAlloc(transform.position + direction, blockSize, new Collider[1]);
-            if (colliders == 0 && !shouldObjectLookAtMe)
+            Collider[] colliders = new Collider[1];
+            int collisionCount = Physics.OverlapBoxNonAlloc(transform.position + direction, blockSize, colliders);
+            if (collisionCount == 0 && !shouldObjectLookAtMe)
             {
                 transform.position += direction;
+                return true;
             }
-            else if (colliders == 0 && IsLookingAtMe(collidedObject, direction))
+            else if (collisionCount == 0 && IsLookingAtMe(collidedObject, direction))
             {
                 transform.position += direction;
+                return true;
             }
+
+            // Multiple pushable 
+            if (collisionCount >= 1)
+            {
+                if (maxPushableAtOnce <= 1)
+                    return false;
+
+                MovableBlock result = colliders[0].gameObject.GetComponent<MovableBlock>();
+                if (result != null)
+                {
+                    bool canBePushed = result.CanBePushed(direction);
+                    if (canBePushed)
+                    {
+                        colliders[0].gameObject.transform.position += direction;
+                        transform.position += direction;
+                    }
+                }
+            }
+
+            return false;
         }
 
+        public bool CanBePushed(Vector3 direction)
+        {
+            int collisionCount = Physics.OverlapBoxNonAlloc(transform.position + direction, blockSize, new Collider[1]);
+            return (collisionCount == 0);
+        }
         private bool IsLookingAtMe(GameObject other, Vector3 pushDirection)
         {
             Vector3 colliderRotation = other.transform.rotation.eulerAngles;
