@@ -16,26 +16,27 @@ namespace Runtime.Movables
         private static readonly float RotationTolerance = 20;
         private static readonly int MoveDistance = 4;
 
-        public bool TryPushTo(Vector3 direction, GameObject collidedObject)
+        public TryPushTo(Vector3 direction, GameObject collidedObject)
         {
             Collider[] colliders = new Collider[1];
             int collisionCount = Physics.OverlapBoxNonAlloc(transform.position + direction, blockSize, colliders);
             if (collisionCount == 0 && !shouldObjectLookAtMe)
             {
                 transform.position += direction;
-                return true;
+                return;
             }
-            else if (collisionCount == 0 && IsLookingAtMe(collidedObject, direction))
+            
+            if (collisionCount == 0 && IsLookingAtMe(collidedObject, direction))
             {
                 transform.position += direction;
-                return true;
+                return;
             }
 
             // Multiple pushable 
             if (collisionCount >= 1)
             {
                 if (maxPushableAtOnce <= 1)
-                    return false;
+                    return;
 
                 MovableBlock result = colliders[0].gameObject.GetComponent<MovableBlock>();
                 if (result != null)
@@ -48,8 +49,6 @@ namespace Runtime.Movables
                     }
                 }
             }
-
-            return false;
         }
 
         public bool CanBePushed(Vector3 direction)
