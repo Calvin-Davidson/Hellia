@@ -1,34 +1,36 @@
 using System;
 using Unity.Mathematics;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Runtime.Movables
 {
-    public class MovableBlock : MonoBehaviour
+    public class MovableBlock : MonoBehaviour, IBlock
     {
         [SerializeField] private Vector3 blockSize;
         [SerializeField] private float cornerTolerance;
         [SerializeField] private LayerMask pushableByLayers;
         [SerializeField] private bool shouldObjectLookAtMe = false;
         [SerializeField, Range(1, 2)] private int maxPushableAtOnce = 1;
+        
+        private const float RotationTolerance = 20;
+        private const int MoveDistance = 4;
+        private const String HoleLayerName = "Hole";
 
-
-        private static readonly float RotationTolerance = 20;
-        private static readonly int MoveDistance = 4;
-
+        
         public void TryPushTo(Vector3 direction, GameObject collidedObject)
         {
             Collider[] colliders = new Collider[1];
             int collisionCount = Physics.OverlapBoxNonAlloc(transform.position + direction, blockSize, colliders);
             if (collisionCount == 0 && !shouldObjectLookAtMe)
             {
-                transform.position += direction;
+                MoveTo(transform.position + direction);
                 return;
             }
             
             if (collisionCount == 0 && IsLookingAtMe(collidedObject, direction))
             {
-                transform.position += direction;
+                MoveTo(transform.position + direction);
                 return;
             }
 
@@ -44,8 +46,8 @@ namespace Runtime.Movables
                     bool canBePushed = result.CanBePushed(direction);
                     if (canBePushed)
                     {
-                        colliders[0].gameObject.transform.position += direction;
-                        transform.position += direction;
+                        result.MoveTo(result.gameObject.transform.position + direction);
+                        MoveTo(transform.position + direction);
                     }
                 }
             }
@@ -120,6 +122,23 @@ namespace Runtime.Movables
                     else
                         TryPushTo(new Vector3(0, 0, MoveDistance), other.gameObject);
                 }
+            }
+        }
+
+        private void MoveTo(Vector3 newPosition)
+        {
+            transform.position = newPosition;
+            OnUpdate();
+        }
+
+        public void OnUpdate()
+        {
+            // Check if there is a collider with the HoleLayer under the object, and if so move to object to that position. Since it's gonna have to fall in the hole.
+            int collideCount = Physics.RaycastNonAlloc(transform.position, new Vector3(0, -4, 0), new RaycastHit[1], 4f,
+                LayerMask.NameToLayer(HoleLayerName));
+            if (collideCount == 0)
+            {
+                transform.position += new Vector3(0, -MoveDistance, 0);
             }
         }
     }
