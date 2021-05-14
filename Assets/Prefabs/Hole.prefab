@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8849115680109293589
 Transform:
@@ -47,12 +47,12 @@ GameObject:
   - component: {fileID: 3281648442943787130}
   - component: {fileID: 3196291713809924899}
   - component: {fileID: 8346858685607645888}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2071915328347783624
 Transform:
@@ -148,7 +148,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &3792434827086199335
 Transform:
@@ -239,12 +239,12 @@ GameObject:
   - component: {fileID: 6933732385716636079}
   - component: {fileID: 4413503582035741782}
   - component: {fileID: 7688853119281146276}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5388461957474218748
 Transform:
@@ -335,12 +335,12 @@ GameObject:
   - component: {fileID: 1060519073113152949}
   - component: {fileID: 4699335242549189374}
   - component: {fileID: 8599991274797393684}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5182537559845798595
 Transform:
@@ -431,12 +431,12 @@ GameObject:
   - component: {fileID: 7028829702161442045}
   - component: {fileID: 538288876869998256}
   - component: {fileID: 1624112747122848784}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5251165892540319288
 Transform:

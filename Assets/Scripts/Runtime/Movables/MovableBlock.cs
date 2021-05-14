@@ -1,6 +1,6 @@
 using System;
+using System.Collections;
 using Unity.Mathematics;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Runtime.Movables
@@ -10,15 +10,16 @@ namespace Runtime.Movables
         [SerializeField] private Vector3 blockSize;
         [SerializeField] private float cornerTolerance;
         [SerializeField] private LayerMask pushableByLayers;
-        [SerializeField] private bool shouldObjectLookAtMe = false;
+        [SerializeField] private bool shouldObjectLookAtMe;
         [SerializeField, Range(1, 2)] private int maxPushableAtOnce = 1;
+        [SerializeField] private float moveSpeed = 1f;
         
         private const float RotationTolerance = 20;
         private const int MoveDistance = 4;
         private const String HoleLayerName = "Hole";
 
         
-        public void TryPushTo(Vector3 direction, GameObject collidedObject)
+        private void TryPushTo(Vector3 direction, GameObject collidedObject)
         {
             Collider[] colliders = new Collider[1];
             int collisionCount = Physics.OverlapBoxNonAlloc(transform.position + direction, blockSize, colliders);
@@ -53,7 +54,7 @@ namespace Runtime.Movables
             }
         }
 
-        public bool CanBePushed(Vector3 direction)
+        private bool CanBePushed(Vector3 direction)
         {
             int collisionCount = Physics.OverlapBoxNonAlloc(transform.position + direction, blockSize, new Collider[1]);
             return (collisionCount == 0);
@@ -127,8 +128,7 @@ namespace Runtime.Movables
 
         private void MoveTo(Vector3 newPosition)
         {
-            transform.position = newPosition;
-            OnUpdate();
+            StartCoroutine(MoveObjectOverTime(gameObject, newPosition, OnUpdate));
         }
 
         public void OnUpdate()
@@ -138,8 +138,24 @@ namespace Runtime.Movables
                 LayerMask.NameToLayer(HoleLayerName));
             if (collideCount == 0)
             {
-                transform.position += new Vector3(0, -MoveDistance, 0);
+                StartCoroutine(MoveObjectOverTime(gameObject, transform.position + new Vector3(0, -MoveDistance, 0), null));
             }
+        }
+
+        private IEnumerator MoveObjectOverTime(GameObject target, Vector3 newPosition, Action onComplete)
+        {
+            float percent = 0f;
+            Vector3 startPosition = target.transform.position;
+
+            while (percent < 1)
+            {
+                percent += Time.deltaTime * moveSpeed;
+                if (percent > 1) percent = 1;
+
+                target.transform.position = Vector3.Lerp(startPosition, newPosition, percent);
+                yield return null;
+            }
+            onComplete?.Invoke();
         }
     }
 }
