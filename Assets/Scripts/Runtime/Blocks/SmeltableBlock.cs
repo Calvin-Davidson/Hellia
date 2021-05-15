@@ -10,6 +10,7 @@ public class SmeltableBlock : MonoBehaviour, IBlock
     private GameObject _player;
     private float _smeltedFor;
     private Animator _animator;
+    private TorchPower _torchPower;
     
     private static readonly int Smelting = Animator.StringToHash("Smelting");
     
@@ -18,12 +19,13 @@ public class SmeltableBlock : MonoBehaviour, IBlock
     {
         _player = GameObject.FindGameObjectWithTag("Player");
         _animator = GetComponent<Animator>();
+        _torchPower = FindObjectOfType<TorchPower>();
     }
 
     private void Update()
     {
         float distance = Vector3.Distance(transform.position, _player.transform.position);
-        if (distance < requiredPlayerSmeltRange && Input.GetKey(KeyCode.E))
+        if (distance < requiredPlayerSmeltRange && Input.GetKey(KeyCode.E) && _torchPower.IsBurning())
         {
             _animator.SetBool(Smelting, true);
             _smeltedFor += Time.deltaTime;
