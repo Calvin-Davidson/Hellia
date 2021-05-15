@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class TorchPower : MonoBehaviour
 {
-    [SerializeField] private float requiredChargingStationRange;
     [SerializeField, Header("Hoe hoger dit getal hoe langer de torch brand")] private float burnDuration = 1f;
     [SerializeField] private float tileSize = 4f;
     
@@ -15,7 +14,6 @@ public class TorchPower : MonoBehaviour
     private void Awake()
     {
         _chargingStations = FindObjectsOfType<TorchChargingStation>();
-        ;
     }
 
     private void Update()
@@ -24,7 +22,6 @@ public class TorchPower : MonoBehaviour
         
         if (IsInChargeStationTile() && Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("you torch has been charged");
             _currentTorchCharge = burnDuration;
         }
     }
