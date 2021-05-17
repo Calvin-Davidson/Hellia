@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7245061490026606576}
   - component: {fileID: 4859197372526566202}
   - component: {fileID: 4563163786955092526}
+  - component: {fileID: -7887006398538673602}
   m_Layer: 8
   m_Name: slope
   m_TagString: Untagged
@@ -96,3 +97,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5495902117074765545, guid: b2807b5e6156b5d44b2f088496a57ce9, type: 3}
+--- !u!114 &-7887006398538673602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6372499137335311087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f199d009625d6374b8eca7c596c55155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surface: 3
