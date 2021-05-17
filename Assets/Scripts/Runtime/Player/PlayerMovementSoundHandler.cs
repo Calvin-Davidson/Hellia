@@ -7,6 +7,7 @@ public class PlayerMovementSoundHandler : MonoBehaviour
 {
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private SoundLibrary[] sounds;
+    [SerializeField] private AudioClip defaultClip;
     private AudioSource source;
     private SoundSurface _currentSoundSurface = SoundSurface.Default;
     private void Awake()
@@ -28,6 +29,7 @@ public class PlayerMovementSoundHandler : MonoBehaviour
     }
     public void PlayWalkSound()
     {
+        source.clip = defaultClip;
         foreach (SoundLibrary soundLibrary in sounds)
         {
             if(soundLibrary.surface == _currentSoundSurface)
@@ -35,8 +37,8 @@ public class PlayerMovementSoundHandler : MonoBehaviour
                 System.Random rnd = new System.Random();
                 int index = rnd.Next(1, soundLibrary.clips.Length);
                 source.clip = soundLibrary.clips[index];
-                source.Play();
             }
         }
+        source.Play();
     }
 }
