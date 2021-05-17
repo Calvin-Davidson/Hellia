@@ -7,8 +7,6 @@ using Runtime.Player;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform target;
-    [SerializeField] private Vector3 offset;
-
     [SerializeField] private float rotationSpeed;
 
 
