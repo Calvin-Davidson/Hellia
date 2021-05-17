@@ -9,14 +9,22 @@ namespace Runtime.Player
         [SerializeField] private CharacterController controller;
         [SerializeField] private float gravity = 9.81f;
         [SerializeField] private float playerSpeed = 5.0f;
-
         [SerializeField] private bool relativeToCamera;
         [SerializeField] private Transform cameraTransform;
+
+        [SerializeField] private Animator animator;
+        private static int walkingAnimationID = Animator.StringToHash("IsWalking");
 
         private Vector3 _playerVelocity;
         private bool _isGrounded;
 
         public static UnityEvent<Vector3> PlayerMoveEvent = new UnityEvent<Vector3>();
+
+        private void Awake()
+        {
+            controller = this.GetComponent<CharacterController>();
+            animator = this.GetComponent<Animator>();
+        }
 
         void Update()
         {
@@ -47,9 +55,11 @@ namespace Runtime.Player
 
             controller.Move(desiredMoveDirection * (Time.deltaTime * playerSpeed));
 
+            animator.SetBool(walkingAnimationID, false);
             if (desiredMoveDirection != Vector3.zero)
             {
                 gameObject.transform.forward = desiredMoveDirection;
+                animator.SetBool(walkingAnimationID, true);
             }
 
             _playerVelocity.y += -gravity * Time.deltaTime;
