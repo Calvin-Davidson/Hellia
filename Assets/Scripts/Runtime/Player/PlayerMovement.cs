@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Runtime.Player
 {
@@ -15,8 +16,12 @@ namespace Runtime.Player
         private Vector3 _playerVelocity;
         private bool _isGrounded;
 
+        public static UnityEvent<Vector3> PlayerMoveEvent = new UnityEvent<Vector3>();
+
         void Update()
         {
+            Vector3 currentPos = transform.position;
+            
             _isGrounded = controller.isGrounded;
             if (_isGrounded && _playerVelocity.y < 0)
             {
@@ -25,8 +30,6 @@ namespace Runtime.Player
 
             if (!relativeToCamera) return;
 
-            Vector3 prevCamPosition = cameraTransform.position;
-            Vector3 playerPosition = transform.position;
 
             float horizontalAxis = Input.GetAxis("Horizontal");
             float verticalAxis = Input.GetAxis("Vertical");
@@ -52,8 +55,7 @@ namespace Runtime.Player
             _playerVelocity.y += -gravity * Time.deltaTime;
             controller.Move(_playerVelocity * Time.deltaTime);
 
-            Vector3 positionDifference = playerPosition - transform.position;
-            cameraTransform.position = prevCamPosition - positionDifference;
+            PlayerMoveEvent?.Invoke(transform.position - currentPos);
         }
     }
 }
