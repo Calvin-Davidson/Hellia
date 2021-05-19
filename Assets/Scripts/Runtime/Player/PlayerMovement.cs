@@ -12,7 +12,7 @@ namespace Runtime.Player
         [SerializeField] private bool relativeToCamera;
         [SerializeField] private Transform cameraTransform;
 
-        [SerializeField] private Animator animator;
+        private Animator _animator;
         private static int walkingAnimationID = Animator.StringToHash("IsWalking");
 
         private Vector3 _playerVelocity;
@@ -23,7 +23,7 @@ namespace Runtime.Player
         private void Awake()
         {
             controller = this.GetComponent<CharacterController>();
-            animator = this.GetComponent<Animator>();
+            _animator = this.GetComponent<Animator>();
         }
 
         void Update()
@@ -55,11 +55,11 @@ namespace Runtime.Player
 
             controller.Move(desiredMoveDirection * (Time.deltaTime * playerSpeed));
 
-            animator.SetBool(walkingAnimationID, false);
+            _animator.SetBool(walkingAnimationID, false);
             if (desiredMoveDirection != Vector3.zero)
             {
                 gameObject.transform.forward = desiredMoveDirection;
-                animator.SetBool(walkingAnimationID, true);
+                _animator.SetBool(walkingAnimationID, true);
             }
 
             _playerVelocity.y += -gravity * Time.deltaTime;
