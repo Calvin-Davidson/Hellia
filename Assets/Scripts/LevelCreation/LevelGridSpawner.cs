@@ -23,7 +23,10 @@ public class LevelGridSpawner : MonoBehaviour
         {
             foreach (GameObject gameObject in gameObjects)
             {
-                DestroyImmediate(gameObject);
+                if (gameObject != null)
+                {
+                    DestroyImmediate(gameObject);
+                }
             }
             gameObjects.Clear();
         }
