@@ -19,18 +19,21 @@ public class LevelGridSpawner : MonoBehaviour
     private Vector3 location;
     public void Generate()
     {
-        foreach(GameObject gameObject in gameObjects)
+        if (gameObject != null)
         {
-            DestroyImmediate(gameObject);
+            foreach (GameObject gameObject in gameObjects)
+            {
+                DestroyImmediate(gameObject);
+            }
         }
         gameObjects.Clear();
         this.transform.position = new Vector3(0, 0, 0);
         for (int x = 0; x < length; x++)
         {
-            location.x = x * tileSize * 10;
+            location.x = x * tileSize;
             for (int y = 0; y < width; y++)
             {
-                location.z = y * tileSize * 10;
+                location.z = y * tileSize;
                 GameObject newObject = Instantiate(prefab, location, Quaternion.identity);
                 newObject.transform.localScale = new Vector3(tileSize, 1, tileSize);
                 newObject.transform.parent = this.transform;
@@ -43,10 +46,10 @@ public class LevelGridSpawner : MonoBehaviour
             wallLocation.y += wallOffset;
             for (int x = 0; x < length; x++)
             {
-                wallLocation.x = x * tileSize * 10;
+                wallLocation.x = x * tileSize;
                 for (int y = 0; y < width; y++)
                 {
-                    wallLocation.z = y * tileSize * 10;
+                    wallLocation.z = y * tileSize;
                     if(x == 0 || x == length - 1 || y == 0 || y == width - 1)
                     {
                         GameObject newObject = Instantiate(wall, wallLocation, Quaternion.identity);
@@ -62,8 +65,8 @@ public class LevelGridSpawner : MonoBehaviour
     {
         Vector3 location = new Vector3(0, 0, 0);
         location.y += wallOffset;
-        location.x = placeLocation.x * tileSize * 10;
-        location.z = placeLocation.y * tileSize * 10;
+        location.x = placeLocation.x * tileSize;
+        location.z = placeLocation.y * tileSize;
         GameObject newObject = Instantiate(wall, location, Quaternion.identity);
         newObject.transform.localScale = wallSize;
         newObject.transform.parent = this.transform;
