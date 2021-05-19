@@ -19,11 +19,14 @@ public class LevelGridSpawner : MonoBehaviour
     private Vector3 location;
     public void Generate()
     {
-        foreach(GameObject gameObject in gameObjects)
+        if(gameObjects.Count > 0)
         {
-            DestroyImmediate(gameObject);
+            foreach (GameObject gameObject in gameObjects)
+            {
+                DestroyImmediate(gameObject);
+            }
+            gameObjects.Clear();
         }
-        gameObjects.Clear();
         this.transform.position = new Vector3(0, 0, 0);
         for (int x = 0; x < length; x++)
         {
