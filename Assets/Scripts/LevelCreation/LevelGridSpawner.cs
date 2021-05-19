@@ -25,8 +25,8 @@ public class LevelGridSpawner : MonoBehaviour
             {
                 DestroyImmediate(gameObject);
             }
+            gameObjects.Clear();
         }
-        gameObjects.Clear();
         this.transform.position = new Vector3(0, 0, 0);
         for (int x = 0; x < length; x++)
         {

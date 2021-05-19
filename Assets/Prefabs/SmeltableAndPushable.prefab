@@ -150,7 +150,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   shouldObjectLookAtMe: 1
-  maxPushableAtOnce: 2
+  maxPushableAtOnce: 1
   moveSpeed: 4
 --- !u!114 &1104868124526800473
 MonoBehaviour:
