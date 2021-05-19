@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class LevelGridSpawner : MonoBehaviour
@@ -19,7 +20,7 @@ public class LevelGridSpawner : MonoBehaviour
     private Vector3 location;
     public void Generate()
     {
-        if (gameObject != null)
+        if (gameObjects != null)
         {
             foreach (GameObject gameObject in gameObjects)
             {
@@ -37,7 +38,8 @@ public class LevelGridSpawner : MonoBehaviour
             for (int y = 0; y < width; y++)
             {
                 location.z = y * tileSize;
-                GameObject newObject = Instantiate(prefab, location, Quaternion.identity);
+                GameObject newObject = (GameObject)PrefabUtility.InstantiatePrefab(prefab as Object);
+                newObject.transform.position = location;
                 newObject.transform.localScale = new Vector3(tileSize, 1, tileSize);
                 newObject.transform.parent = this.transform;
                 gameObjects.Add(newObject);
@@ -55,7 +57,8 @@ public class LevelGridSpawner : MonoBehaviour
                     wallLocation.z = y * tileSize;
                     if(x == 0 || x == length - 1 || y == 0 || y == width - 1)
                     {
-                        GameObject newObject = Instantiate(wall, wallLocation, Quaternion.identity);
+                        GameObject newObject = (GameObject) PrefabUtility.InstantiatePrefab(wall as Object);
+                        newObject.transform.position = wallLocation;
                         newObject.transform.localScale = wallSize;
                         newObject.transform.parent = this.transform;
                         gameObjects.Add(newObject);
@@ -70,7 +73,8 @@ public class LevelGridSpawner : MonoBehaviour
         location.y += wallOffset;
         location.x = placeLocation.x * tileSize;
         location.z = placeLocation.y * tileSize;
-        GameObject newObject = Instantiate(wall, location, Quaternion.identity);
+        GameObject newObject = (GameObject)PrefabUtility.InstantiatePrefab(wall as Object);
+        newObject.transform.position = location;
         newObject.transform.localScale = wallSize;
         newObject.transform.parent = this.transform;
         gameObjects.Add(newObject);
