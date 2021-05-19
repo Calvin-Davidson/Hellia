@@ -16,6 +16,7 @@ namespace Runtime.Movables
         
         private const float RotationTolerance = 20;
         private const int MoveDistance = 4;
+        private const int holeDistance = 3;
         private const String HoleLayerName = "Hole";
 
         
@@ -138,7 +139,7 @@ namespace Runtime.Movables
                 LayerMask.NameToLayer(HoleLayerName));
             if (collideCount == 0)
             {
-                StartCoroutine(MoveObjectOverTime(gameObject, transform.position + new Vector3(0, -MoveDistance, 0), null));
+                StartCoroutine(MoveObjectOverTime(gameObject, transform.position + new Vector3(0, -holeDistance, 0), null));
             }
         }
 
