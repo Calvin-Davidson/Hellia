@@ -30,6 +30,10 @@ public class LevelGridSpawner : MonoBehaviour
                 }
             }
             gameObjects.Clear();
+        } 
+        else
+        {
+            gameObjects = new List<GameObject>();
         }
         this.transform.position = new Vector3(0, 0, 0);
         for (int x = 0; x < length; x++)
@@ -42,6 +46,7 @@ public class LevelGridSpawner : MonoBehaviour
                 newObject.transform.position = location;
                 newObject.transform.localScale = new Vector3(tileSize, 1, tileSize);
                 newObject.transform.parent = this.transform;
+                Debug.Log(newObject);
                 gameObjects.Add(newObject);
             }
         }
