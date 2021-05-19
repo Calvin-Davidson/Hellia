@@ -115,7 +115,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   shouldObjectLookAtMe: 1
-  maxPushableAtOnce: 2
+  maxPushableAtOnce: 1
   moveSpeed: 4
 --- !u!114 &5954253004638420828
 MonoBehaviour:
@@ -129,4 +129,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f199d009625d6374b8eca7c596c55155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  surface: 2
+  surface: 3

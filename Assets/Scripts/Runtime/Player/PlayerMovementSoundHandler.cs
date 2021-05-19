@@ -20,7 +20,6 @@ public class PlayerMovementSoundHandler : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, layerMask))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
-            Debug.Log(hit.transform.gameObject);
             if (hit.transform.gameObject.TryGetComponent(out BlockSoundSurface blockSurface))
             {
                 _currentSoundSurface = blockSurface.GetSoundSurface();
