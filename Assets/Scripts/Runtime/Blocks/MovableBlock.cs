@@ -135,9 +135,9 @@ namespace Runtime.Movables
         public void OnUpdate()
         {
             // Check if there is a collider with the HoleLayer under the object, and if so move to object to that position. Since it's gonna have to fall in the hole.
-            int collideCount = Physics.RaycastNonAlloc(transform.position, new Vector3(0, -4, 0), new RaycastHit[1], 4f,
-                LayerMask.NameToLayer(HoleLayerName));
-            if (collideCount == 0)
+            RaycastHit[] hits = new RaycastHit[1];
+            int collideCount = Physics.RaycastNonAlloc(transform.position, new Vector3(0, -10, 0), hits, 10f);
+            if (collideCount != 0 && hits[0].collider.gameObject.layer == LayerMask.NameToLayer(HoleLayerName))
             {
                 StartCoroutine(MoveObjectOverTime(gameObject, transform.position + new Vector3(0, -holeDistance, 0), null));
             }
