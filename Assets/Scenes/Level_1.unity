@@ -2663,7 +2663,7 @@ GameObject:
   - component: {fileID: 925206865}
   - component: {fileID: 925206864}
   m_Layer: 0
-  m_Name: Floor2
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2678,18 +2678,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 925206863}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38c3f02268d8c7e48a8f199b163ed3f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d952e01e8ce39e4292cce3f8a0e85ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  length: 7
-  width: 7
-  tileSize: 4
-  prefab: {fileID: 1434299075289558646, guid: 090e99b24e6ef33488495f37e8318600, type: 3}
-  spawnWalls: 1
-  wall: {fileID: 6372499137335311087, guid: 50d22d2babeb7fa4d8f127640e1a2bc1, type: 3}
-  wallOffset: 2
-  wallSize: {x: 4, y: 4, z: 4}
-  placeLocation: {x: 3, y: 3}
+  sceneName: Level_2
 --- !u!4 &925206865
 Transform:
   m_ObjectHideFlags: 0
@@ -5424,15 +5416,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1850389758614715184, guid: 06564c2ec78f4984cb00177b446c489a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.71
+      value: 18.79
       objectReference: {fileID: 0}
     - target: {fileID: 1850389758614715184, guid: 06564c2ec78f4984cb00177b446c489a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.84
+      value: 8.48
       objectReference: {fileID: 0}
     - target: {fileID: 1850389758614715184, guid: 06564c2ec78f4984cb00177b446c489a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.19
+      value: 9.84
       objectReference: {fileID: 0}
     - target: {fileID: 1850389758614715184, guid: 06564c2ec78f4984cb00177b446c489a, type: 3}
       propertyPath: m_LocalRotation.w
