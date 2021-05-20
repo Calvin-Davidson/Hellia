@@ -62,7 +62,7 @@ namespace Runtime.Player
                 _animator.SetBool(walkingAnimationID, true);
             }
 
-            _playerVelocity.y += -gravity * Time.deltaTime;
+            _playerVelocity.y -= gravity * Time.deltaTime;
             controller.Move(_playerVelocity * Time.deltaTime);
 
             PlayerMoveEvent?.Invoke(transform.position - currentPos);
