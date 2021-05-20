@@ -10,6 +10,7 @@ namespace Runtime.Movables
         [SerializeField] private Vector3 blockSize;
         [SerializeField] private float cornerTolerance;
         [SerializeField] private LayerMask pushableByLayers;
+        [SerializeField] private LayerMask holeLayer;
         [SerializeField] private bool shouldObjectLookAtMe;
         [SerializeField, Range(1, 2)] private int maxPushableAtOnce = 1;
         [SerializeField] private float moveSpeed = 1f;
@@ -135,12 +136,27 @@ namespace Runtime.Movables
         public void OnUpdate()
         {
             // Check if there is a collider with the HoleLayer under the object, and if so move to object to that position. Since it's gonna have to fall in the hole.
-            RaycastHit[] hits = new RaycastHit[1];
+            RaycastHit[] hits = new RaycastHit[10];
             int collideCount = Physics.RaycastNonAlloc(transform.position, new Vector3(0, -10, 0), hits, 10f);
-            if (collideCount != 0 && hits[0].collider.gameObject.layer == LayerMask.NameToLayer(HoleLayerName))
+            bool isFree = true;
+            for (int i = 0; i < hits.Length; i++)
+            {
+                if (hits[i].collider == null) continue;
+                if (!IsInLayer(hits[i].collider.gameObject.layer, holeLayer))
+                {
+                    isFree = false;
+                    break;
+                }
+            }
+            if (isFree)
             {
                 StartCoroutine(MoveObjectOverTime(gameObject, transform.position + new Vector3(0, -holeDistance, 0), null));
             }
+        }
+
+        public static bool IsInLayer(int layer, LayerMask layermask)
+        {
+            return layermask == (layermask | (1 << layer));
         }
 
         private IEnumerator MoveObjectOverTime(GameObject target, Vector3 newPosition, Action onComplete)
