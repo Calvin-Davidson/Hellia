@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 500bae11454246a4a8a481185afdd435, type: 3}
+  m_Name: StoneCue
+  m_EditorClassIdentifier: 
+  surface: 3
+  clips:
+  - {fileID: 8300000, guid: 428a7b227873c22498d4b23d575a91fc, type: 3}
+  - {fileID: 8300000, guid: 898b6d88db239c449be54b3cdcd75421, type: 3}
+  - {fileID: 8300000, guid: 8caf1a7004166c14a92fac295423c0f0, type: 3}
+  - {fileID: 8300000, guid: de674116ee3a60443831300f13d6c5cd, type: 3}
+  - {fileID: 8300000, guid: 39cb02a5b51b47d49a546d0b37b16d99, type: 3}
+  - {fileID: 8300000, guid: 8d7c2fe01d1396e4bafab5da71df85d0, type: 3}
+  - {fileID: 8300000, guid: 9d83e1e564973434b9f2d6cce92e7539, type: 3}
+  - {fileID: 8300000, guid: e8643719ab578584cb7b39a5aab1ea2d, type: 3}
