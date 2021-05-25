@@ -14,23 +14,24 @@ namespace Runtime.Movables
         [SerializeField] private bool shouldObjectLookAtMe;
         [SerializeField, Range(1, 2)] private int maxPushableAtOnce = 1;
         [SerializeField] private float moveSpeed = 1f;
-        
+
         private const float RotationTolerance = 20;
         private const int MoveDistance = 4;
         private const int holeDistance = 3;
         private const String HoleLayerName = "Hole";
 
-        
+
         private void TryPushTo(Vector3 direction, GameObject collidedObject)
         {
             Collider[] colliders = new Collider[1];
-            int collisionCount = Physics.OverlapBoxNonAlloc(transform.position + direction, blockSize, colliders);
+            LayerMask allLayers = ~0;
+            int collisionCount = Physics.OverlapBoxNonAlloc(transform.position + direction, blockSize, colliders, Quaternion.identity, allLayers, QueryTriggerInteraction.Ignore);
             if (collisionCount == 0 && !shouldObjectLookAtMe)
             {
                 MoveTo(transform.position + direction);
                 return;
             }
-            
+
             if (collisionCount == 0 && IsLookingAtMe(collidedObject, direction))
             {
                 MoveTo(transform.position + direction);
@@ -58,9 +59,12 @@ namespace Runtime.Movables
 
         private bool CanBePushed(Vector3 direction)
         {
-            int collisionCount = Physics.OverlapBoxNonAlloc(transform.position + direction, blockSize, new Collider[1]);
+            LayerMask allLayers = ~0;
+            int collisionCount = Physics.OverlapBoxNonAlloc(transform.position + direction, blockSize, new Collider[1],
+                Quaternion.identity, allLayers, QueryTriggerInteraction.Ignore);
             return (collisionCount == 0);
         }
+
         private bool IsLookingAtMe(GameObject other, Vector3 pushDirection)
         {
             Vector3 colliderRotation = other.transform.rotation.eulerAngles;
@@ -148,10 +152,14 @@ namespace Runtime.Movables
                     break;
                 }
             }
+
             if (isFree)
             {
-                StartCoroutine(MoveObjectOverTime(gameObject, transform.position + new Vector3(0, -holeDistance, 0), null));
+                StartCoroutine(MoveObjectOverTime(gameObject, transform.position + new Vector3(0, -holeDistance, 0),
+                    null));
             }
+
+            GameControl.Instance.onBlockUpdate.Invoke();
         }
 
         public static bool IsInLayer(int layer, LayerMask layermask)
@@ -172,6 +180,7 @@ namespace Runtime.Movables
                 target.transform.position = Vector3.Lerp(startPosition, newPosition, percent);
                 yield return null;
             }
+
             onComplete?.Invoke();
         }
     }

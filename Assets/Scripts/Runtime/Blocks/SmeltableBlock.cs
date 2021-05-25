@@ -11,9 +11,9 @@ public class SmeltableBlock : MonoBehaviour, IBlock
     private float _smeltedFor;
     private Animator _animator;
     private TorchPower _torchPower;
-    
+
     private static readonly int Smelting = Animator.StringToHash("Smelting");
-    
+
 
     private void Awake()
     {
@@ -29,8 +29,11 @@ public class SmeltableBlock : MonoBehaviour, IBlock
         {
             _animator.SetBool(Smelting, true);
             _smeltedFor += Time.deltaTime;
-            if (_smeltedFor > smeltTime) 
+            if (_smeltedFor > smeltTime)
+            {
+                OnUpdate();
                 Destroy(this.gameObject);
+            }
         }
         else
         {
@@ -46,6 +49,6 @@ public class SmeltableBlock : MonoBehaviour, IBlock
 
     public void OnUpdate()
     {
-        throw new System.NotImplementedException();
+        GameControl.Instance.onBlockUpdate.Invoke();
     }
 }

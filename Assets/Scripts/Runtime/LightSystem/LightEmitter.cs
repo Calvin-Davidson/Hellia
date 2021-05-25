@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Runtime.LightSystem;
 using Runtime.Movables;
 using UnityEngine;
 
-public class LightEmitter : MonoBehaviour, IBlock
+public class LightEmitter : MonoBehaviour
 {
     public GameObject defaultLightBeam;
 
@@ -12,26 +13,13 @@ public class LightEmitter : MonoBehaviour, IBlock
 
     private void Awake()
     {
-        _beams = new List<GameObject>();
-        _beams.Add(defaultLightBeam);
+        _beams = new List<GameObject> {defaultLightBeam};
         UpdateLightBeams();
     }
 
-    private void OnDrawGizmosSelected()
+    private void Start()
     {
-        Vector3 direction = transform.forward;
-        Vector3 pos = transform.position;
-
-        Gizmos.DrawRay(pos, direction);
-
-        Vector3 right = Quaternion.LookRotation(direction) * new Vector3(0, 0, 1);
-        Vector3 left = Quaternion.LookRotation(direction) * new Vector3(0, 0, 1);
-        Gizmos.DrawRay(pos + direction, right * 5);
-        Gizmos.DrawRay(pos + direction, left * 5);
-    }
-
-    public void OnUpdate()
-    {
+        GameControl.Instance.onBlockUpdate?.AddListener(UpdateLightBeams);
     }
 
     public void UpdateLightBeams()
@@ -40,7 +28,6 @@ public class LightEmitter : MonoBehaviour, IBlock
         {
             RaycastHit[] hits = Physics.RaycastAll(beam.transform.position, -beam.transform.up, 100);
 
-            Debug.Log(hits.Length);
             if (hits.Length == 0) return;
 
             RaycastHit closest = hits[0];
@@ -51,13 +38,17 @@ public class LightEmitter : MonoBehaviour, IBlock
                     closest = hit;
                 }
             }
-
             float distance = Vector3.Distance(closest.point, beam.transform.position);
-            Debug.Log(distance);
-            
             Vector3 currentScale = defaultLightBeam.transform.localScale;
             currentScale.y = distance / transform.localScale.z / 2;
             defaultLightBeam.transform.localScale = currentScale;
+
+            Debug.Log("updating beam");
+            if (closest.collider.gameObject.TryGetComponent(out ILightReceiver lightReceiver))
+            {
+                Debug.Log("has the script");
+                lightReceiver.LightReceive(transform.position);
+            }
         }
     }
 }
