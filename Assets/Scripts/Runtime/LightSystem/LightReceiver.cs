@@ -21,10 +21,11 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
     [SerializeField] private GameObject left;
     [SerializeField] private GameObject right;
 
-    public void LightReceive(Vector3 from)
+    private List<ILightComponent> sendingTo = new List<ILightComponent>();
+    private List<ILightComponent> receivingFrom = new List<ILightComponent>();
+    public void LightReceive(ILightComponent lightComponent)
     {
-        Vector3 dir = (from - transform.position).normalized;
-        Debug.Log(dir);
+        Vector3 dir = (lightComponent.GetGameObject().transform.position- transform.position).normalized;
         if (dir.Equals(Vector3.right) && beamRight)
             FixReceiverBeams(right);
         if (dir.Equals(Vector3.forward) && beamForward)
@@ -33,6 +34,20 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
             FixReceiverBeams(backward);
         if (dir.Equals(Vector3.left) && beamLeft)
             FixReceiverBeams(left);
+        
+        if (!receivingFrom.Contains(lightComponent)) receivingFrom.Add(lightComponent);
+        
+        foreach (var component in sendingTo)
+        {
+            try
+            {
+                ILightReceiver receiver = (ILightReceiver) component;
+                receiver.LightReceive(this);
+            }
+            catch (InvalidCastException e)
+            {
+            }
+        }
     }
 
     public void FixReceiverBeams(GameObject receivedFromBeam)
@@ -49,16 +64,31 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
 
         if (backward != null && receivedFromBeam != backward)
             FixBeamSize(backward);
+        
     }
 
-    public void LightDisconnect()
+    public void LightDisconnect(ILightComponent lightComponent)
     {
         Vector3 beamScale = beamPrefab.transform.localScale;
         if (forward) forward.transform.localScale = beamScale;
         if (backward) backward.transform.localScale = beamScale;
         if (left) left.transform.localScale = beamScale;
         if (right) right.transform.localScale = beamScale;
-        Debug.Log("reset");
+
+        if (receivingFrom.Contains(lightComponent)) receivingFrom.Remove(lightComponent);
+        
+        foreach (var component in sendingTo)
+        {
+            try
+            {
+                ILightReceiver receiver = (ILightReceiver) component;
+                receiver.LightDisconnect(this);
+            }
+            catch (InvalidCastException e)
+            {
+            }
+        }
+        sendingTo.Clear();
     }
 
     public Vector3 GetClosestBeamTarget(GameObject beam)
@@ -76,6 +106,11 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
             }
         }
 
+        if (closest.collider.gameObject.TryGetComponent(out ILightComponent lightComponent))
+        {
+            if (!sendingTo.Contains(lightComponent)) sendingTo.Add(lightComponent);
+        }
+        
         return closest.point;
     }
 
@@ -89,7 +124,9 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         currentScale.y = distance / transform.localScale.z / 2;
         beam.transform.localScale = currentScale;
     }
-    
+
+
+    #region Editor methodes
 
     public void InstantiateBeams()
     {
@@ -117,5 +154,12 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         newObject.transform.localRotation = Quaternion.Euler(rotation);
         newObject.transform.localScale = beamPrefab.transform.localScale;
         return newObject;
+    }    
+
+    #endregion
+
+    public GameObject GetGameObject()
+    {
+        return gameObject;
     }
 }

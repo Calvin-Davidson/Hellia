@@ -5,7 +5,7 @@ using Runtime.LightSystem;
 using Runtime.Movables;
 using UnityEngine;
 
-public class LightEmitter : MonoBehaviour
+public class LightEmitter : MonoBehaviour, ILightComponent
 {
     public GameObject defaultLightBeam;
 
@@ -41,14 +41,14 @@ public class LightEmitter : MonoBehaviour
 
             Debug.Log(closest.collider.gameObject.name);
 
-            if (closest.collider.gameObject.TryGetComponent(out ILightReceiver lightReceiver))
+            if (closest.collider.gameObject.TryGetComponent(out LightReceiver lightReceiver))
             {
-                lightReceiver.LightReceive(transform.position);
+                lightReceiver.LightReceive(this);
                 this.lightReceiver = lightReceiver;
             }
             else
             {
-                this.lightReceiver?.LightDisconnect();
+                this.lightReceiver?.LightDisconnect(this);
                 this.lightReceiver = null;
             }
             
@@ -57,5 +57,10 @@ public class LightEmitter : MonoBehaviour
             currentScale.y = distance / transform.localScale.z / 2;
             defaultLightBeam.transform.localScale = currentScale;
         }
+    }
+
+    public GameObject GetGameObject()
+    {
+        return gameObject;
     }
 }

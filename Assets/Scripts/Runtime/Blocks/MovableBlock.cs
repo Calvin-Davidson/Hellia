@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -134,7 +135,26 @@ namespace Runtime.Movables
 
         private void MoveTo(Vector3 newPosition)
         {
-            StartCoroutine(MoveObjectOverTime(gameObject, newPosition, OnUpdate));
+            List<Collider> colliders = new List<Collider>(GetComponents<Collider>());
+            for (var i = 0; i < colliders.Count; i++)
+            {
+                if (colliders[i].enabled == false)
+                {
+                    colliders.RemoveAt(i);
+                    i--;
+                }
+                else
+                {
+                    colliders[i].enabled = false;
+                }
+            }
+            StartCoroutine(MoveObjectOverTime(gameObject, newPosition, () =>
+            {
+                OnUpdate();
+                foreach (var t in colliders)
+                    t.enabled = true;
+            }));
+            
         }
 
         public void OnUpdate()

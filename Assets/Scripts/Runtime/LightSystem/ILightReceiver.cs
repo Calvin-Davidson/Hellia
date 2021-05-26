@@ -2,10 +2,10 @@ using UnityEngine;
 
 namespace Runtime.LightSystem
 {
-    public interface ILightReceiver
+    public interface ILightReceiver : ILightComponent
     {
-        public void LightReceive(Vector3 from);
-        public void LightDisconnect();
+        public void LightReceive(ILightComponent lightComponent);
+        public void LightDisconnect(ILightComponent lightComponent);
         public void FixReceiverBeams(GameObject receivedFromBeam);
         public Vector3 GetClosestBeamTarget(GameObject beamObject);
         public void FixBeamSize(GameObject beam);
