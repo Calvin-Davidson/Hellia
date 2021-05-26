@@ -10,7 +10,7 @@ public class LightEmitter : MonoBehaviour
     public GameObject defaultLightBeam;
 
     private List<GameObject> _beams;
-
+    private ILightReceiver lightReceiver;
     private void Awake()
     {
         _beams = new List<GameObject> {defaultLightBeam};
@@ -38,17 +38,24 @@ public class LightEmitter : MonoBehaviour
                     closest = hit;
                 }
             }
+
+            Debug.Log(closest.collider.gameObject.name);
+
+            if (closest.collider.gameObject.TryGetComponent(out ILightReceiver lightReceiver))
+            {
+                lightReceiver.LightReceive(transform.position);
+                this.lightReceiver = lightReceiver;
+            }
+            else
+            {
+                this.lightReceiver?.LightDisconnect();
+                this.lightReceiver = null;
+            }
+            
             float distance = Vector3.Distance(closest.point, beam.transform.position);
             Vector3 currentScale = defaultLightBeam.transform.localScale;
             currentScale.y = distance / transform.localScale.z / 2;
             defaultLightBeam.transform.localScale = currentScale;
-
-            Debug.Log("updating beam");
-            if (closest.collider.gameObject.TryGetComponent(out ILightReceiver lightReceiver))
-            {
-                Debug.Log("has the script");
-                lightReceiver.LightReceive(transform.position);
-            }
         }
     }
 }

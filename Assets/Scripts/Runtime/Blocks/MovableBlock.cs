@@ -181,6 +181,7 @@ namespace Runtime.Movables
                 yield return null;
             }
 
+            GameControl.Instance.onBlockUpdate.Invoke();
             onComplete?.Invoke();
         }
     }
