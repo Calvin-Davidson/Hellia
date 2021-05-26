@@ -10,7 +10,8 @@ using Object = UnityEngine.Object;
 public class LightReceiver : MonoBehaviour, ILightReceiver
 {
     [SerializeField] private GameObject beamPrefab;
-
+    [SerializeField] private LayerMask playerLayerMask;
+    
     [Space] [SerializeField] private bool beamForward;
     [SerializeField] private bool beamBackward;
     [SerializeField] private bool beamLeft;
@@ -26,6 +27,11 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
     public void LightReceive(ILightComponent lightComponent)
     {
         Vector3 dir = (lightComponent.GetGameObject().transform.position- transform.position).normalized;
+        
+        List<ILightComponent> prevSendingTo = new List<ILightComponent>();
+        sendingTo.ForEach(component => prevSendingTo.Add(component));
+        sendingTo.Clear();
+        
         if (dir.Equals(Vector3.right) && beamRight)
             FixReceiverBeams(right);
         if (dir.Equals(Vector3.forward) && beamForward)
@@ -37,6 +43,20 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         
         if (!receivingFrom.Contains(lightComponent)) receivingFrom.Add(lightComponent);
         
+        prevSendingTo.ForEach(component =>
+        {
+            if (!sendingTo.Contains(component))
+            {
+                try
+                {
+                    ILightReceiver receiver = (ILightReceiver) component;
+                    receiver.LightDisconnect(this);
+                }
+                catch (InvalidCastException e)
+                {
+                }
+            }
+        });
         foreach (var component in sendingTo)
         {
             try
@@ -52,7 +72,6 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
 
     public void FixReceiverBeams(GameObject receivedFromBeam)
     {
-        Debug.Log(receivedFromBeam.gameObject.transform.position);
         if (left != null && receivedFromBeam != left)
             FixBeamSize(left);
 
@@ -93,7 +112,7 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
 
     public Vector3 GetClosestBeamTarget(GameObject beam)
     {
-        RaycastHit[] hits = Physics.RaycastAll(beam.transform.position + -beam.transform.up, -beam.transform.up, 100);
+        RaycastHit[] hits = Physics.RaycastAll(beam.transform.position + -beam.transform.up, -beam.transform.up, 100, ~playerLayerMask);
 
         if (hits.Length == 0) return Vector3.zero;
 
@@ -117,7 +136,6 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
     public void FixBeamSize(GameObject beam)
     {
         Vector3 closestPoint = GetClosestBeamTarget(beam);
-        Debug.Log(closestPoint);
         if (closestPoint == Vector3.zero) return;
         float distance = Vector3.Distance(closestPoint, beam.transform.position);
         Vector3 currentScale = beam.transform.localScale;

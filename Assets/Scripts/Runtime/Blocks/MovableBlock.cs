@@ -135,26 +135,13 @@ namespace Runtime.Movables
 
         private void MoveTo(Vector3 newPosition)
         {
-            List<Collider> colliders = new List<Collider>(GetComponents<Collider>());
-            for (var i = 0; i < colliders.Count; i++)
-            {
-                if (colliders[i].enabled == false)
-                {
-                    colliders.RemoveAt(i);
-                    i--;
-                }
-                else
-                {
-                    colliders[i].enabled = false;
-                }
-            }
+            List<BoxCollider> colliders = new List<BoxCollider>(GetComponents<BoxCollider>());
+            colliders.ForEach(boxCollider => boxCollider.isTrigger = true);
             StartCoroutine(MoveObjectOverTime(gameObject, newPosition, () =>
             {
                 OnUpdate();
-                foreach (var t in colliders)
-                    t.enabled = true;
+                colliders.ForEach(boxCollider => boxCollider.isTrigger = false);
             }));
-            
         }
 
         public void OnUpdate()
@@ -189,6 +176,8 @@ namespace Runtime.Movables
 
         private IEnumerator MoveObjectOverTime(GameObject target, Vector3 newPosition, Action onComplete)
         {
+            GameControl.Instance.onBlockUpdate?.Invoke();
+
             float percent = 0f;
             Vector3 startPosition = target.transform.position;
 
@@ -196,12 +185,15 @@ namespace Runtime.Movables
             {
                 percent += Time.deltaTime * moveSpeed;
                 if (percent > 1) percent = 1;
+                
+                GameControl.Instance.onBlockUpdate?.Invoke();
 
                 target.transform.position = Vector3.Lerp(startPosition, newPosition, percent);
                 yield return null;
             }
-
-            GameControl.Instance.onBlockUpdate.Invoke();
+            
+            
+            GameControl.Instance.onBlockUpdate?.Invoke();
             onComplete?.Invoke();
         }
     }

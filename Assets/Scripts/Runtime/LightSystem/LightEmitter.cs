@@ -8,6 +8,7 @@ using UnityEngine;
 public class LightEmitter : MonoBehaviour, ILightComponent
 {
     public GameObject defaultLightBeam;
+    [SerializeField] private LayerMask playerLayerMask;
 
     private List<GameObject> _beams;
     private ILightReceiver lightReceiver;
@@ -26,7 +27,7 @@ public class LightEmitter : MonoBehaviour, ILightComponent
     {
         foreach (GameObject beam in _beams)
         {
-            RaycastHit[] hits = Physics.RaycastAll(beam.transform.position, -beam.transform.up, 100);
+            RaycastHit[] hits = Physics.RaycastAll(beam.transform.position, -beam.transform.up, 1000, ~playerLayerMask);
 
             if (hits.Length == 0) return;
 
@@ -38,16 +39,15 @@ public class LightEmitter : MonoBehaviour, ILightComponent
                     closest = hit;
                 }
             }
-
-            Debug.Log(closest.collider.gameObject.name);
-
-            if (closest.collider.gameObject.TryGetComponent(out LightReceiver lightReceiver))
+            ILightReceiver receiver = closest.collider.gameObject.GetComponent<ILightReceiver>();
+            if (receiver != null)
             {
-                lightReceiver.LightReceive(this);
-                this.lightReceiver = lightReceiver;
+                receiver.LightReceive(this);
+                this.lightReceiver = receiver;
             }
             else
             {
+                Debug.Log(lightReceiver == null);
                 this.lightReceiver?.LightDisconnect(this);
                 this.lightReceiver = null;
             }
