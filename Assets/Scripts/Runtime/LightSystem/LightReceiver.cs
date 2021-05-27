@@ -115,10 +115,6 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         sendingTo.Clear();
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawLine(left.transform.position, -left.transform.up * 100);
-    }
 
     public Vector3 GetClosestBeamTarget(GameObject beam)
     {

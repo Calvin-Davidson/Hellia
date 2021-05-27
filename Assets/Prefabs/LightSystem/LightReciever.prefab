@@ -152,10 +152,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   beamForward: 0
-  beamBackward: 1
+  beamBackward: 0
   beamLeft: 0
   beamRight: 1
   forward: {fileID: 0}
   backward: {fileID: 0}
   left: {fileID: 0}
   right: {fileID: 0}
+  debug: 0
