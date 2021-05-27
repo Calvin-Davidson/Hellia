@@ -64,8 +64,22 @@ namespace Runtime.Player
 
             _playerVelocity.y -= gravity * Time.deltaTime;
             controller.Move(_playerVelocity * Time.deltaTime);
-
+            
             PlayerMoveEvent?.Invoke(transform.position - currentPos);
+        }
+
+        public void MoveTo(Vector3 newPosition)
+        {
+            Debug.Log("Moving :O");
+            Vector3 prevPosition = transform.position;
+            Vector3 diffVector = newPosition - prevPosition;
+            controller.Move(diffVector);
+            PlayerMoveEvent?.Invoke(transform.position - prevPosition);
+        }
+
+        public void MoveToOverTime()
+        {
+
         }
     }
 }
