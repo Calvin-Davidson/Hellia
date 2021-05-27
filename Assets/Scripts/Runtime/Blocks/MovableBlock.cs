@@ -138,6 +138,7 @@ namespace Runtime.Movables
 
         private void MoveTo(Vector3 newPosition)
         {
+            GameControl.Instance.onBlockPushed?.Invoke();
             List<BoxCollider> colliders = new List<BoxCollider>(GetComponents<BoxCollider>());
             colliders.ForEach(boxCollider => boxCollider.isTrigger = true);
             StartCoroutine(MoveObjectOverTime(gameObject, newPosition, () =>
@@ -180,7 +181,6 @@ namespace Runtime.Movables
         private IEnumerator MoveObjectOverTime(GameObject target, Vector3 newPosition, Action onComplete)
         {
             GameControl.Instance.onBlockUpdate?.Invoke();
-
             float percent = 0f;
             Vector3 startPosition = target.transform.position;
 
