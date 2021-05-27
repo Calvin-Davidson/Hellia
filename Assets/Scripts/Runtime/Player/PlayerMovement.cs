@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -26,7 +28,7 @@ namespace Runtime.Player
             _animator = this.GetComponent<Animator>();
         }
 
-        void Update()
+        private void Update()
         {
             Vector3 currentPos = transform.position;
 
@@ -37,7 +39,6 @@ namespace Runtime.Player
             }
 
             if (!relativeToCamera) return;
-
 
             float horizontalAxis = Input.GetAxis("Horizontal");
             float verticalAxis = Input.GetAxis("Vertical");
@@ -51,7 +52,6 @@ namespace Runtime.Player
             right.Normalize();
 
             var desiredMoveDirection = forward * verticalAxis + right * horizontalAxis;
-
 
             controller.Move(desiredMoveDirection * (Time.deltaTime * playerSpeed));
 
@@ -77,32 +77,28 @@ namespace Runtime.Player
             PlayerMoveEvent?.Invoke(transform.position - prevPosition);
         }
 
-        public void MoveToOverTime()
+        public void MoveToOverTime(Vector3 newPosition, float speed, Action onComplete)
         {
-
+            StartCoroutine(MovePlayerOverTime(newPosition, speed, onComplete));
         }
 
-            private IEnumerator MovePlayerOverTime(GameObject target, Vector3 newPosition, Action onComplete)
+        private IEnumerator MovePlayerOverTime(Vector3 newPosition, float speed, Action onComplete)
+        {
+            GameControl.Instance.onBlockUpdate?.Invoke();
+
+            float percent = 0f;
+            Vector3 startPosition = transform.position;
+
+            while (percent < 1)
             {
-                GameControl.Instance.onBlockUpdate?.Invoke();
+                percent += Time.deltaTime * speed;
+                if (percent > 1) percent = 1;
 
-                float percent = 0f;
-                Vector3 startPosition = target.transform.position;
-
-                while (percent < 1)
-                {
-                    percent += Time.deltaTime * moveSpeed;
-                    if (percent > 1) percent = 1;
-
-                    GameControl.Instance.onBlockUpdate?.Invoke();
-
-                    target.transform.position = Vector3.Lerp(startPosition, newPosition, percent);
-                    yield return null;
-                }
-
-
-                GameControl.Instance.onBlockUpdate?.Invoke();
-                onComplete?.Invoke();
+                transform.position = Vector3.Lerp(startPosition, newPosition, percent);
+                yield return null;
             }
+
+            onComplete?.Invoke();
         }
+    }
 }
