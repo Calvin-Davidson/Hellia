@@ -29,7 +29,7 @@ namespace Runtime.Player
         void Update()
         {
             Vector3 currentPos = transform.position;
-            
+
             _isGrounded = controller.isGrounded;
             if (_isGrounded && _playerVelocity.y < 0)
             {
@@ -64,7 +64,7 @@ namespace Runtime.Player
 
             _playerVelocity.y -= gravity * Time.deltaTime;
             controller.Move(_playerVelocity * Time.deltaTime);
-            
+
             PlayerMoveEvent?.Invoke(transform.position - currentPos);
         }
 
@@ -81,5 +81,28 @@ namespace Runtime.Player
         {
 
         }
-    }
+
+            private IEnumerator MovePlayerOverTime(GameObject target, Vector3 newPosition, Action onComplete)
+            {
+                GameControl.Instance.onBlockUpdate?.Invoke();
+
+                float percent = 0f;
+                Vector3 startPosition = target.transform.position;
+
+                while (percent < 1)
+                {
+                    percent += Time.deltaTime * moveSpeed;
+                    if (percent > 1) percent = 1;
+
+                    GameControl.Instance.onBlockUpdate?.Invoke();
+
+                    target.transform.position = Vector3.Lerp(startPosition, newPosition, percent);
+                    yield return null;
+                }
+
+
+                GameControl.Instance.onBlockUpdate?.Invoke();
+                onComplete?.Invoke();
+            }
+        }
 }
