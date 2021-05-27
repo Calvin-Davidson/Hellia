@@ -108,7 +108,7 @@ Material:
     - _GlowStrength: 2
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _PannerSpeed: 0.1
+    - _PannerSpeed: -3
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
