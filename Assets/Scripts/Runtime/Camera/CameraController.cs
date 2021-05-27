@@ -30,8 +30,7 @@ public class CameraController : MonoBehaviour
         Vector3 offset = transform.position - target.position;
         float offsetLength = offset.magnitude;
 
-        Debug.Log(offsetLength);
-
+       
         Vector3 axis = offset;
 
         axis.y = 0;

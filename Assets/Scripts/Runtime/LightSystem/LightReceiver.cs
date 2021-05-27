@@ -22,6 +22,8 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
     [SerializeField] private GameObject left;
     [SerializeField] private GameObject right;
 
+    [SerializeField]private bool debug = false;
+
     private List<ILightComponent> sendingTo = new List<ILightComponent>();
     private ILightComponent receivingFrom;
 
@@ -113,10 +115,15 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         sendingTo.Clear();
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawLine(left.transform.position, -left.transform.up * 100);
+    }
+
     public Vector3 GetClosestBeamTarget(GameObject beam)
     {
         //RaycastHit[] hits = Physics.RaycastAll(beam.transform.position + -beam.transform.up, -beam.transform.up, 100, ~playerLayerMask);
-        RaycastHit[] hits = Physics.RaycastAll(beam.transform.position - beam.transform.forward*2, -beam.transform.up, 1000, ~playerLayerMask);
+        RaycastHit[] hits = Physics.RaycastAll(beam.transform.position, -beam.transform.up, 1000, ~playerLayerMask);
 
         if (hits.Length == 0) return Vector3.zero;
 
@@ -139,6 +146,12 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         {
             smeltableBlock.forceSmelt = true;
             if (closest.collider.gameObject.TryGetComponent(out MovableBlock movableBlock)) movableBlock.canBePushed = false;
+        }
+
+        if (debug)
+        {
+            Debug.Log(closest.collider.gameObject.name);
+            Debug.Log(closest.point);
         }
 
         return closest.point;
