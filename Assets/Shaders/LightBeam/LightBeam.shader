@@ -43,7 +43,7 @@ Shader "LightBeam"
 
             fixed4 frag(v2f i) : SV_Target
             {
-                fixed brightness_mask = tex2D(_MainTex, i.uv.xy).a * _Color.a * (_GlowStrength*sin(_GlowSpeed * _Time) + _GlowStrength) + _GlowBrightness;
+                fixed brightness_mask = (tex2D(_MainTex, i.uv.xy).a) * _Color.a * (_GlowStrength*sin(_GlowSpeed * _Time) + _GlowStrength + _GlowBrightness);
                 return fixed4(_Color.rgb, brightness_mask);
             }
             ENDCG
