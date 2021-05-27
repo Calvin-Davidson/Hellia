@@ -17,6 +17,17 @@ public class GameControl : MonoBehaviour
         onBlockUpdate = new UnityEvent();
     }
 
+    public void BlockUpdateNextFrame()
+    {
+        StartCoroutine(RunNextFixedUpdate(() => onBlockUpdate?.Invoke()));
+    }
+
+    private IEnumerator RunNextFixedUpdate(Action a)
+    {
+        yield return new WaitForFixedUpdate();
+        a?.Invoke();
+    }
+
     public static GameControl Instance
     {
         get

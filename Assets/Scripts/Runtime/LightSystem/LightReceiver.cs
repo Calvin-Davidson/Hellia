@@ -6,7 +6,7 @@ using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
-
+using Runtime.Movables;
 public class LightReceiver : MonoBehaviour, ILightReceiver
 {
     [SerializeField] private GameObject beamPrefab;
@@ -23,9 +23,11 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
     [SerializeField] private GameObject right;
 
     private List<ILightComponent> sendingTo = new List<ILightComponent>();
-    private List<ILightComponent> receivingFrom = new List<ILightComponent>();
+    private ILightComponent receivingFrom;
+
     public void LightReceive(ILightComponent lightComponent)
     {
+        if (receivingFrom != null && receivingFrom != lightComponent) return;
         Vector3 dir = (lightComponent.GetGameObject().transform.position- transform.position).normalized;
         
         List<ILightComponent> prevSendingTo = new List<ILightComponent>();
@@ -40,8 +42,8 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
             FixReceiverBeams(backward);
         if (dir.Equals(Vector3.left) && beamLeft)
             FixReceiverBeams(left);
-        
-        if (!receivingFrom.Contains(lightComponent)) receivingFrom.Add(lightComponent);
+
+        this.receivingFrom = lightComponent;
         
         prevSendingTo.ForEach(component =>
         {
@@ -88,13 +90,14 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
 
     public void LightDisconnect(ILightComponent lightComponent)
     {
+        if (lightComponent != this.receivingFrom) return;
+        this.receivingFrom = null;
+
         Vector3 beamScale = beamPrefab.transform.localScale;
         if (forward) forward.transform.localScale = beamScale;
         if (backward) backward.transform.localScale = beamScale;
         if (left) left.transform.localScale = beamScale;
         if (right) right.transform.localScale = beamScale;
-
-        if (receivingFrom.Contains(lightComponent)) receivingFrom.Remove(lightComponent);
         
         foreach (var component in sendingTo)
         {
@@ -112,7 +115,8 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
 
     public Vector3 GetClosestBeamTarget(GameObject beam)
     {
-        RaycastHit[] hits = Physics.RaycastAll(beam.transform.position + -beam.transform.up, -beam.transform.up, 100, ~playerLayerMask);
+        //RaycastHit[] hits = Physics.RaycastAll(beam.transform.position + -beam.transform.up, -beam.transform.up, 100, ~playerLayerMask);
+        RaycastHit[] hits = Physics.RaycastAll(beam.transform.position - beam.transform.forward*2, -beam.transform.up, 1000, ~playerLayerMask);
 
         if (hits.Length == 0) return Vector3.zero;
 
@@ -125,11 +129,18 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
             }
         }
 
+
         if (closest.collider.gameObject.TryGetComponent(out ILightComponent lightComponent))
         {
             if (!sendingTo.Contains(lightComponent)) sendingTo.Add(lightComponent);
         }
-        
+
+        if (closest.collider.gameObject.TryGetComponent(out SmeltableBlock smeltableBlock))
+        {
+            smeltableBlock.forceSmelt = true;
+            if (closest.collider.gameObject.TryGetComponent(out MovableBlock movableBlock)) movableBlock.canBePushed = false;
+        }
+
         return closest.point;
     }
 

@@ -42,16 +42,24 @@ public class LightEmitter : MonoBehaviour, ILightComponent
             ILightReceiver receiver = closest.collider.gameObject.GetComponent<ILightReceiver>();
             if (receiver != null)
             {
+                if (this.lightReceiver != null && this.lightReceiver != receiver) 
+                    this.lightReceiver.LightDisconnect(this);
+
                 receiver.LightReceive(this);
                 this.lightReceiver = receiver;
             }
             else
             {
-                Debug.Log(lightReceiver == null);
                 this.lightReceiver?.LightDisconnect(this);
                 this.lightReceiver = null;
             }
             
+            if (closest.collider.gameObject.TryGetComponent(out SmeltableBlock smeltableBlock))
+            {
+                smeltableBlock.forceSmelt = true;
+                if (closest.collider.gameObject.TryGetComponent(out MovableBlock movableBlock)) movableBlock.canBePushed = false;
+            }
+
             float distance = Vector3.Distance(closest.point, beam.transform.position);
             Vector3 currentScale = defaultLightBeam.transform.localScale;
             currentScale.y = distance / transform.localScale.z / 2;

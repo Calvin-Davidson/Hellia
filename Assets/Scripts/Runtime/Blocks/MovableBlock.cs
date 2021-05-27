@@ -16,6 +16,8 @@ namespace Runtime.Movables
         [SerializeField, Range(1, 2)] private int maxPushableAtOnce = 1;
         [SerializeField] private float moveSpeed = 1f;
 
+        public bool canBePushed = true;
+
         private const float RotationTolerance = 20;
         private const int MoveDistance = 4;
         private const int holeDistance = 3;
@@ -104,6 +106,7 @@ namespace Runtime.Movables
 
         private void OnCollisionStay(Collision other)
         {
+            if (!canBePushed) return;
             if (((pushableByLayers.value & (1 << other.gameObject.layer)) > 0))
             {
                 Vector3 contactPoint = other.contacts[0].point;
