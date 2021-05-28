@@ -8,7 +8,6 @@ namespace Runtime.Movables
     public class Climable : MonoBehaviour, IBlock
     {
         public Transform playerClimbPosition;
-        public BoxCollider topCollider;
 
         private void OnTriggerEnter(Collider other)
         {
