@@ -13,6 +13,8 @@ namespace Runtime.Player
         [SerializeField] private float playerSpeed = 5.0f;
         [SerializeField] private bool relativeToCamera;
         [SerializeField] private Transform cameraTransform;
+        [SerializeField] private string inputX = "Horizontal";
+        [SerializeField] private string inputY = "Vertical";
 
         private Animator _animator;
         private static int walkingAnimationID = Animator.StringToHash("IsWalking");
@@ -40,8 +42,8 @@ namespace Runtime.Player
 
             if (!relativeToCamera) return;
 
-            float horizontalAxis = Input.GetAxis("Horizontal");
-            float verticalAxis = Input.GetAxis("Vertical");
+            float horizontalAxis = Input.GetAxis(inputX);
+            float verticalAxis = Input.GetAxis(inputY);
 
             var forward = cameraTransform.forward;
             var right = cameraTransform.right;
