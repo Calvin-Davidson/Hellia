@@ -8,15 +8,28 @@ namespace Runtime.Movables
     public class Climable : MonoBehaviour, IBlock
     {
         public Transform playerClimbPosition;
-        public Transform playerTopPosition;
         public BoxCollider topCollider;
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                topCollider.enabled = false;
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
-                player.GetComponent<PlayerMovement>().MoveToOverTime(playerTopPosition.position, 1, () => topCollider.enabled = true);
+                Vector3 targetPos = player.transform.position + new Vector3(0, 3, 0);
+                if (player.TryGetComponent(out PlayerMovement playerMovement))
+                {
+                    float prevGravity = playerMovement.Gravity;
+                    playerMovement.Gravity = 0f;
+                    
+                    playerMovement.MoveTo(playerClimbPosition.position);
+                    player.transform.LookAt(transform.position);
+                    playerMovement.MoveToOverTime(targetPos, 1,
+                        () =>
+                        {
+                            playerMovement.Gravity = prevGravity;
+                            playerMovement.MoveToOverTime(player.transform.position + transform.right, 5, null, false);
+                        }, false);
+                }
             }
         }
 
@@ -27,4 +40,3 @@ namespace Runtime.Movables
         }
     }
 }
-

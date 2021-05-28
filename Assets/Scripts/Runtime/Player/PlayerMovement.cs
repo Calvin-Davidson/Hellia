@@ -30,7 +30,7 @@ namespace Runtime.Player
 
         private void Update()
         {
-            Vector3 currentPos = transform.position;
+            Vector3 prevPosition = transform.position;
 
             _isGrounded = controller.isGrounded;
             if (_isGrounded && _playerVelocity.y < 0)
@@ -65,27 +65,24 @@ namespace Runtime.Player
             _playerVelocity.y -= gravity * Time.deltaTime;
             controller.Move(_playerVelocity * Time.deltaTime);
 
-            PlayerMoveEvent?.Invoke(transform.position - currentPos);
+            PlayerMoveEvent?.Invoke(transform.position - prevPosition);
         }
 
         public void MoveTo(Vector3 newPosition)
         {
-            Debug.Log("Moving :O");
             Vector3 prevPosition = transform.position;
             Vector3 diffVector = newPosition - prevPosition;
             controller.Move(diffVector);
             PlayerMoveEvent?.Invoke(transform.position - prevPosition);
         }
 
-        public void MoveToOverTime(Vector3 newPosition, float speed, Action onComplete)
+        public void MoveToOverTime(Vector3 newPosition, float speed, Action onComplete, bool canStillMove = true)
         {
-            StartCoroutine(MovePlayerOverTime(newPosition, speed, onComplete));
+            StartCoroutine(MovePlayerOverTime(newPosition, speed, onComplete, canStillMove));
         }
 
-        private IEnumerator MovePlayerOverTime(Vector3 newPosition, float speed, Action onComplete)
+        private IEnumerator MovePlayerOverTime(Vector3 newPosition, float speed, Action onComplete, bool canStillMove = true)
         {
-            GameControl.Instance.onBlockUpdate?.Invoke();
-
             float percent = 0f;
             Vector3 startPosition = transform.position;
 
@@ -93,12 +90,17 @@ namespace Runtime.Player
             {
                 percent += Time.deltaTime * speed;
                 if (percent > 1) percent = 1;
-
-                transform.position = Vector3.Lerp(startPosition, newPosition, percent);
+                MoveTo(Vector3.Lerp(startPosition, newPosition, percent));
                 yield return null;
             }
-
+            
             onComplete?.Invoke();
+        }
+
+        public float Gravity
+        {
+            get => gravity;
+            set => gravity = value;
         }
     }
 }
