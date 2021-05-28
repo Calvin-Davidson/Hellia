@@ -31,7 +31,6 @@ public class CameraController : MonoBehaviour
         Vector3 offset = transform.position - target.position;
         float offsetLength = offset.magnitude;
 
-       
         Vector3 axis = offset;
 
         axis.y = 0;
@@ -58,6 +57,8 @@ public class CameraController : MonoBehaviour
         transform.RotateAround (target.position,new Vector3(0.0f,1.0f,0.0f),horizontal * Time.deltaTime * rotationSpeed);
         transform.RotateAround(target.position, axis, vertical * Time.deltaTime * rotationSpeed);
         
+        Debug.Log(offsetLength);
+
     }
 
 
