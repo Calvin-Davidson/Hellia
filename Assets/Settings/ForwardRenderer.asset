@@ -57,7 +57,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
-    enabled: 0
+    enabled: 1
     materialReference: {fileID: 2100000, guid: 655ba20d4af45eb43ba55f42e4f75edf, type: 2}
     customIdentifier: CustomPostProcessing
     renderPassEvent: 550
