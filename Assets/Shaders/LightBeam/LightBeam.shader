@@ -7,6 +7,7 @@ Shader "LightBeam"
         _GlowSpeed("Glow speed", Float) = 1.0
         _GlowStrength("Glow strength", Float) = 1.0
         _GlowBrightness("Glow brightness", Float) = 1.0
+        _PannerSpeed("Panner speed", Float) = 0.0
     }
     SubShader
     {
@@ -26,6 +27,7 @@ Shader "LightBeam"
             float _GlowSpeed;
             float _GlowStrength;
             float _GlowBrightness;
+            float _PannerSpeed;
 
             struct v2f
             {
@@ -43,7 +45,9 @@ Shader "LightBeam"
 
             fixed4 frag(v2f i) : SV_Target
             {
-                fixed brightness_mask = (tex2D(_MainTex, i.uv.xy).a) * _Color.a * (_GlowStrength*sin(_GlowSpeed * _Time) + _GlowStrength + _GlowBrightness);
+                float2 uv = i.uv.xy;
+                uv.x += _Time * _MainTex_ST.x * _PannerSpeed;
+                fixed brightness_mask = (tex2D(_MainTex, uv).a) * _Color.a * (_GlowStrength*sin(_GlowSpeed * _Time) + _GlowStrength + _GlowBrightness);
                 return fixed4(_Color.rgb, brightness_mask);
             }
             ENDCG

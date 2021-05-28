@@ -8,13 +8,14 @@ public class GameControl : MonoBehaviour
 {
     private static GameControl instance;
     public UnityEvent onBlockUpdate;
-
+    public UnityEvent onBlockPushed;
     private void Awake()
     {
 
         if (instance != null) return;
         instance = this;
         onBlockUpdate = new UnityEvent();
+        onBlockPushed = new UnityEvent();
     }
 
     public void BlockUpdateNextFrame()
