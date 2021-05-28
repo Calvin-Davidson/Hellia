@@ -91,6 +91,8 @@ MonoBehaviour:
   playerSpeed: 5
   relativeToCamera: 1
   cameraTransform: {fileID: 0}
+  inputX: Horizontal
+  inputY: Vertical
 --- !u!95 &4062134263748716829
 Animator:
   serializedVersion: 3
@@ -439,7 +441,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 705c12a7bfe95a44695183f2d9cb344b, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.05
+  m_Volume: 0.02
   m_Pitch: 1
   Loop: 0
   Mute: 0
