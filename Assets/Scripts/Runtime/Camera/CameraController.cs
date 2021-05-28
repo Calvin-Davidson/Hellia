@@ -8,11 +8,12 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform target;
     [SerializeField] private float rotationSpeed;
+    [SerializeField] private float lookXSensitivity = 2;
+    [SerializeField] private float lookYSensitivity = 1.5f;
+    [SerializeField] private float zoomSensitivity = 3;
 
-    [SerializeField] private float zoomSpeed;
-
-    [SerializeField] private float minZoom;
-    [SerializeField] private float maxZoom;
+    [SerializeField] private float minZoom = 5;
+    [SerializeField] private float maxZoom = 35;
 
     private void Start()
     {
@@ -40,8 +41,8 @@ public class CameraController : MonoBehaviour
 
         CameraZoom(offset, offsetLength);
 
-        float horizontal = Input.GetAxis("Mouse X");
-        float vertical = -Input.GetAxis("Mouse Y");
+        float horizontal = Input.GetAxis("Mouse X") * lookXSensitivity;
+        float vertical = -Input.GetAxis("Mouse Y") * lookYSensitivity;
         float angle = transform.rotation.eulerAngles.x;
 
         if (angle > 60)
@@ -65,6 +66,6 @@ public class CameraController : MonoBehaviour
         float CameraInput = -Input.GetAxis("Mouse ScrollWheel");
         if (CameraInput < 0 && offsetLength < minZoom) CameraInput = 0;
         if (CameraInput > 0 && offsetLength > maxZoom) CameraInput = 0;
-        transform.position += offset * CameraInput * zoomSpeed;
+        transform.position += offset * CameraInput * zoomSensitivity;
     }
 }
