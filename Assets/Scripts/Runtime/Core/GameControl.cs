@@ -29,6 +29,11 @@ public class GameControl : MonoBehaviour
         a?.Invoke();
     }
 
+    public void LoadLevel(int id)
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(id);
+    }
+
     public static GameControl Instance
     {
         get
