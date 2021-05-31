@@ -38,6 +38,11 @@ public class GameControl : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(id);
     }
 
+    public void QuiteGame()
+    {
+        Application.Quit();
+    }
+
     public static GameControl Instance
     {
         get
