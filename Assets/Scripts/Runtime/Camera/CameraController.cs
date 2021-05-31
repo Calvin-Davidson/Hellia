@@ -41,7 +41,7 @@ public class CameraController : MonoBehaviour
         CameraZoom(offset, offsetLength);
 
         float horizontal = Input.GetAxis("Mouse X") * lookXSensitivity;
-        float vertical = -Input.GetAxis("Mouse Y") * lookYSensitivity;
+        float vertical = Mathf.Clamp(-Input.GetAxis("Mouse Y") * lookYSensitivity, -3f, 3f);
         float angle = transform.rotation.eulerAngles.x;
 
         if (angle > 60)
@@ -56,9 +56,6 @@ public class CameraController : MonoBehaviour
         transform.LookAt(target);
         transform.RotateAround (target.position,new Vector3(0.0f,1.0f,0.0f),horizontal * Time.deltaTime * rotationSpeed);
         transform.RotateAround(target.position, axis, vertical * Time.deltaTime * rotationSpeed);
-        
-        Debug.Log(offsetLength);
-
     }
 
 
