@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-#if (UNITY_EDITOR) 
+
 public class LevelGridSpawner : MonoBehaviour
 {
     [SerializeField] private int length = 7;
@@ -85,4 +85,3 @@ public class LevelGridSpawner : MonoBehaviour
         gameObjects.Add(newObject);
     }
 }
-#endif

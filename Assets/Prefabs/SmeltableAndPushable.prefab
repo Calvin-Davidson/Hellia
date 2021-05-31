@@ -149,9 +149,6 @@ MonoBehaviour:
   pushableByLayers:
     serializedVersion: 2
     m_Bits: 64
-  holeLayer:
-    serializedVersion: 2
-    m_Bits: 512
   shouldObjectLookAtMe: 1
   maxPushableAtOnce: 1
   moveSpeed: 4

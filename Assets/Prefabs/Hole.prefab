@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8849115680109293589}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Hole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 178629982803946760}
   - component: {fileID: 6928449269638929927}
   - component: {fileID: 3418430655990576986}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Plane (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
