@@ -14,7 +14,7 @@ namespace Runtime.Movables
             if (other.gameObject.CompareTag("Player"))
             {
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
-                Vector3 targetPos = player.transform.position + new Vector3(0, 3, 0);
+                Vector3 targetPos = player.transform.position + new Vector3(0, 4, 0);
                 if (player.TryGetComponent(out PlayerMovement playerMovement))
                 {
                     float prevGravity = playerMovement.Gravity;
