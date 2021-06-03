@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dc6d895553fefc54ea7d4f38a372857e, type: 2}
+  - {fileID: 2100000, guid: 16f8934cc49b28d41b00280b95e9ce58, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -120,6 +120,7 @@ MonoBehaviour:
   shouldObjectLookAtMe: 1
   maxPushableAtOnce: 1
   moveSpeed: 4
+  canBePushed: 1
 --- !u!114 &5954253004638420828
 MonoBehaviour:
   m_ObjectHideFlags: 0
