@@ -20,7 +20,7 @@ namespace Runtime.Movables
 
         private const float RotationTolerance = 20;
         private const int MoveDistance = 4;
-        private const int holeDistance = 3;
+        private const int holeDistance = 4;
         private const String HoleLayerName = "Hole";
 
 
