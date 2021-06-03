@@ -165,6 +165,7 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
 
 
     #region Editor methodes
+#if (UNITY_EDITOR)
 
     public void InstantiateBeams()
     {
@@ -184,7 +185,6 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
             right = SpawnBeam(new Vector3(0, 0, 90));
     }
 
-#if (UNITY_EDITOR)
     private GameObject SpawnBeam(Vector3 rotation)
     {
         GameObject newObject = (GameObject) PrefabUtility.InstantiatePrefab(beamPrefab as Object);

@@ -9,7 +9,8 @@ namespace Runtime.LightSystem
         public void FixReceiverBeams(GameObject receivedFromBeam);
         public Vector3 GetClosestBeamTarget(GameObject beamObject);
         public void FixBeamSize(GameObject beam);
-
+#if (UNITY_EDITOR)
         public void InstantiateBeams();
+#endif
     }
 }
