@@ -184,6 +184,7 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
             right = SpawnBeam(new Vector3(0, 0, 90));
     }
 
+#if (UNITY_EDITOR)
     private GameObject SpawnBeam(Vector3 rotation)
     {
         GameObject newObject = (GameObject) PrefabUtility.InstantiatePrefab(beamPrefab as Object);
@@ -192,9 +193,10 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         newObject.transform.localRotation = Quaternion.Euler(rotation);
         newObject.transform.localScale = beamPrefab.transform.localScale;
         return newObject;
-    }    
+    }
 
-    #endregion
+#endif
+#endregion
 
     public GameObject GetGameObject()
     {
