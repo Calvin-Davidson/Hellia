@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,6 +13,8 @@ namespace Runtime.Player
         [SerializeField] private float playerSpeed = 5.0f;
         [SerializeField] private bool relativeToCamera;
         [SerializeField] private Transform cameraTransform;
+        [SerializeField] private string inputX = "Horizontal";
+        [SerializeField] private string inputY = "Vertical";
 
         private Animator _animator;
         private static int walkingAnimationID = Animator.StringToHash("IsWalking");
@@ -26,10 +30,10 @@ namespace Runtime.Player
             _animator = this.GetComponent<Animator>();
         }
 
-        void Update()
+        private void Update()
         {
-            Vector3 currentPos = transform.position;
-            
+            Vector3 prevPosition = transform.position;
+
             _isGrounded = controller.isGrounded;
             if (_isGrounded && _playerVelocity.y < 0)
             {
@@ -38,9 +42,8 @@ namespace Runtime.Player
 
             if (!relativeToCamera) return;
 
-
-            float horizontalAxis = Input.GetAxis("Horizontal");
-            float verticalAxis = Input.GetAxis("Vertical");
+            float horizontalAxis = Input.GetAxis(inputX);
+            float verticalAxis = Input.GetAxis(inputY);
 
             var forward = cameraTransform.forward;
             var right = cameraTransform.right;
@@ -51,7 +54,6 @@ namespace Runtime.Player
             right.Normalize();
 
             var desiredMoveDirection = forward * verticalAxis + right * horizontalAxis;
-
 
             controller.Move(desiredMoveDirection * (Time.deltaTime * playerSpeed));
 
@@ -65,7 +67,42 @@ namespace Runtime.Player
             _playerVelocity.y -= gravity * Time.deltaTime;
             controller.Move(_playerVelocity * Time.deltaTime);
 
-            PlayerMoveEvent?.Invoke(transform.position - currentPos);
+            PlayerMoveEvent?.Invoke(transform.position - prevPosition);
+        }
+
+        public void MoveTo(Vector3 newPosition)
+        {
+            Vector3 prevPosition = transform.position;
+            Vector3 diffVector = newPosition - prevPosition;
+            controller.Move(diffVector);
+            PlayerMoveEvent?.Invoke(transform.position - prevPosition);
+        }
+
+        public void MoveToOverTime(Vector3 newPosition, float speed, Action onComplete, bool canStillMove = true)
+        {
+            StartCoroutine(MovePlayerOverTime(newPosition, speed, onComplete, canStillMove));
+        }
+
+        private IEnumerator MovePlayerOverTime(Vector3 newPosition, float speed, Action onComplete, bool canStillMove = true)
+        {
+            float percent = 0f;
+            Vector3 startPosition = transform.position;
+
+            while (percent < 1)
+            {
+                percent += Time.deltaTime * speed;
+                if (percent > 1) percent = 1;
+                MoveTo(Vector3.Lerp(startPosition, newPosition, percent));
+                yield return null;
+            }
+            
+            onComplete?.Invoke();
+        }
+
+        public float Gravity
+        {
+            get => gravity;
+            set => gravity = value;
         }
     }
 }

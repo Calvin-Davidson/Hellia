@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -14,23 +15,26 @@ namespace Runtime.Movables
         [SerializeField] private bool shouldObjectLookAtMe;
         [SerializeField, Range(1, 2)] private int maxPushableAtOnce = 1;
         [SerializeField] private float moveSpeed = 1f;
-        
+
+        public bool canBePushed = true;
+
         private const float RotationTolerance = 20;
         private const int MoveDistance = 4;
-        private const int holeDistance = 3;
+        private const int holeDistance = 4;
         private const String HoleLayerName = "Hole";
 
-        
+
         private void TryPushTo(Vector3 direction, GameObject collidedObject)
         {
             Collider[] colliders = new Collider[1];
-            int collisionCount = Physics.OverlapBoxNonAlloc(transform.position + direction, blockSize, colliders);
+            LayerMask allLayers = ~0;
+            int collisionCount = Physics.OverlapBoxNonAlloc(transform.position + direction, blockSize, colliders, Quaternion.identity, allLayers, QueryTriggerInteraction.Ignore);
             if (collisionCount == 0 && !shouldObjectLookAtMe)
             {
                 MoveTo(transform.position + direction);
                 return;
             }
-            
+
             if (collisionCount == 0 && IsLookingAtMe(collidedObject, direction))
             {
                 MoveTo(transform.position + direction);
@@ -58,9 +62,12 @@ namespace Runtime.Movables
 
         private bool CanBePushed(Vector3 direction)
         {
-            int collisionCount = Physics.OverlapBoxNonAlloc(transform.position + direction, blockSize, new Collider[1]);
+            LayerMask allLayers = ~0;
+            int collisionCount = Physics.OverlapBoxNonAlloc(transform.position + direction, blockSize, new Collider[1],
+                Quaternion.identity, allLayers, QueryTriggerInteraction.Ignore);
             return (collisionCount == 0);
         }
+
         private bool IsLookingAtMe(GameObject other, Vector3 pushDirection)
         {
             Vector3 colliderRotation = other.transform.rotation.eulerAngles;
@@ -99,6 +106,7 @@ namespace Runtime.Movables
 
         private void OnCollisionStay(Collision other)
         {
+            if (!canBePushed) return;
             if (((pushableByLayers.value & (1 << other.gameObject.layer)) > 0))
             {
                 Vector3 contactPoint = other.contacts[0].point;
@@ -130,7 +138,14 @@ namespace Runtime.Movables
 
         private void MoveTo(Vector3 newPosition)
         {
-            StartCoroutine(MoveObjectOverTime(gameObject, newPosition, OnUpdate));
+            GameControl.Instance.onBlockPushed?.Invoke();
+            List<BoxCollider> colliders = new List<BoxCollider>(GetComponents<BoxCollider>());
+            colliders.ForEach(boxCollider => boxCollider.isTrigger = true);
+            StartCoroutine(MoveObjectOverTime(gameObject, newPosition, () =>
+            {
+                OnUpdate();
+                colliders.ForEach(boxCollider => boxCollider.isTrigger = false);
+            }));
         }
 
         public void OnUpdate()
@@ -148,10 +163,14 @@ namespace Runtime.Movables
                     break;
                 }
             }
+
             if (isFree)
             {
-                StartCoroutine(MoveObjectOverTime(gameObject, transform.position + new Vector3(0, -holeDistance, 0), null));
+                StartCoroutine(MoveObjectOverTime(gameObject, transform.position + new Vector3(0, -holeDistance, 0),
+                    null));
             }
+
+            GameControl.Instance.onBlockUpdate.Invoke();
         }
 
         public static bool IsInLayer(int layer, LayerMask layermask)
@@ -161,6 +180,7 @@ namespace Runtime.Movables
 
         private IEnumerator MoveObjectOverTime(GameObject target, Vector3 newPosition, Action onComplete)
         {
+            GameControl.Instance.onBlockUpdate?.Invoke();
             float percent = 0f;
             Vector3 startPosition = target.transform.position;
 
@@ -168,10 +188,15 @@ namespace Runtime.Movables
             {
                 percent += Time.deltaTime * moveSpeed;
                 if (percent > 1) percent = 1;
+                
+                GameControl.Instance.onBlockUpdate?.Invoke();
 
                 target.transform.position = Vector3.Lerp(startPosition, newPosition, percent);
                 yield return null;
             }
+            
+            
+            GameControl.Instance.onBlockUpdate?.Invoke();
             onComplete?.Invoke();
         }
     }
