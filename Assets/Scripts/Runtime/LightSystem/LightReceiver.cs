@@ -165,6 +165,7 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
 
 
     #region Editor methodes
+#if (UNITY_EDITOR)
 
     public void InstantiateBeams()
     {
@@ -192,9 +193,10 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         newObject.transform.localRotation = Quaternion.Euler(rotation);
         newObject.transform.localScale = beamPrefab.transform.localScale;
         return newObject;
-    }    
+    }
 
-    #endregion
+#endif
+#endregion
 
     public GameObject GetGameObject()
     {
