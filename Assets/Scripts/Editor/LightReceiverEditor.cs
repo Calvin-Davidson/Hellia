@@ -10,8 +10,8 @@ public class LightReceiverEditor : Editor
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
-        
-        ILightReceiver myTarget = (ILightReceiver)target;
+
+        LightReceiver myTarget = (LightReceiver)target;
         if (GUILayout.Button("Respawn crystals"))
         {
             myTarget.InstantiateBeams();

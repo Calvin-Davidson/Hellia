@@ -21,8 +21,6 @@ public class RunAfter : MonoBehaviour
         currentTime += Time.deltaTime;
         
         if (currentTime > after)
-        {
             unityEvent?.Invoke();
-        }
     }
 }

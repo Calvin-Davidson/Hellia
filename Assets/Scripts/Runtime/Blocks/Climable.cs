@@ -13,7 +13,7 @@ namespace Runtime.Movables
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                GameObject player = other.gameObject;
                 Vector3 targetPos = player.transform.position + new Vector3(0, 4, 0);
                 if (player.TryGetComponent(out PlayerMovement playerMovement))
                 {
@@ -22,8 +22,7 @@ namespace Runtime.Movables
                     
                     playerMovement.MoveTo(playerClimbPosition.position);
                     player.transform.LookAt(transform.position);
-                    playerMovement.MoveToOverTime(targetPos, 1,
-                        () =>
+                    playerMovement.MoveToOverTime(targetPos, 1,() =>
                         {
                             playerMovement.Gravity = prevGravity;
                             playerMovement.MoveToOverTime(player.transform.position + transform.right, 5, null, false);
