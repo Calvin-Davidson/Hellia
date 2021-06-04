@@ -19,6 +19,7 @@ namespace Runtime.Movables
         public bool canBePushed = true;
 
         private const float RotationTolerance = 20;
+     
         private const int MoveDistance = 4;
         private const int holeDistance = 4;
         private const String HoleLayerName = "Hole";
@@ -114,9 +115,12 @@ namespace Runtime.Movables
 
                 float xDifference = contactDirection.x;
                 float zDifference = contactDirection.z;
+                float yDifference = contactDirection.y;
 
                 // you are now allowed to push the corners.
                 if (Math.Abs(math.abs(xDifference) - math.abs(zDifference)) < cornerTolerance) return;
+                Debug.Log(yDifference);
+                if (yDifference < 0) return;
 
                 // Collision was on the X axis
                 if (math.abs(xDifference) > math.abs(zDifference))
