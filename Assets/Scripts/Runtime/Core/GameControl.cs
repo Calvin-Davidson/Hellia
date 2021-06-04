@@ -11,15 +11,11 @@ public class GameControl : MonoBehaviour
     public UnityEvent onBlockPushed;
     public UnityEvent onNextLevel;
     public UnityEvent onResetLevel;
+    
     private void Awake()
     {
-
         if (instance != null) return;
         instance = this;
-        onBlockUpdate = new UnityEvent();
-        onBlockPushed = new UnityEvent();
-        onNextLevel = new UnityEvent();
-        onResetLevel = new UnityEvent();
     }
 
     public void BlockUpdateNextFrame()

@@ -27,7 +27,7 @@ namespace Runtime.Player
         private void Awake()
         {
             controller = this.GetComponent<CharacterController>();
-            _animator = this.GetComponent<Animator>();
+            _animator = this.GetComponentInChildren<Animator>();
         }
 
         private void Update()

@@ -155,7 +155,7 @@ namespace Runtime.Movables
                     null));
             }
 
-            GameControl.Instance.onBlockUpdate.Invoke();
+            GameControl.Instance.onBlockUpdate?.Invoke();
         }
 
         public static bool IsInLayer(int layer, LayerMask layermask)
