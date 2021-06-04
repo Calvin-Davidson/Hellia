@@ -91,7 +91,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   shouldObjectLookAtMe: 1
-  maxPushableAtOnce: 1
   moveSpeed: 4
   canBePushed: 1
 --- !u!114 &4757100665473244668
@@ -185,7 +184,7 @@ PrefabInstance:
     - target: {fileID: -4714766789449801292, guid: 5573821fb1fe535498e2b79320f4c4f3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 785fa532615192040bd7231dbb48fda2, type: 2}
+      objectReference: {fileID: 2100000, guid: 45f72de11e39f154f95b0ca44d662c7d, type: 2}
     - target: {fileID: 919132149155446097, guid: 5573821fb1fe535498e2b79320f4c4f3, type: 3}
       propertyPath: m_Name
       value: Crystal_Stoneblock_Lshape
@@ -193,11 +192,11 @@ PrefabInstance:
     - target: {fileID: 5790665468742227225, guid: 5573821fb1fe535498e2b79320f4c4f3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: dc6d895553fefc54ea7d4f38a372857e, type: 2}
+      objectReference: {fileID: 2100000, guid: faa2a11f06d5ff54a8d6fb9ad7934ea9, type: 2}
     - target: {fileID: 5801446643847624186, guid: 5573821fb1fe535498e2b79320f4c4f3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 785fa532615192040bd7231dbb48fda2, type: 2}
+      objectReference: {fileID: 2100000, guid: 45f72de11e39f154f95b0ca44d662c7d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5573821fb1fe535498e2b79320f4c4f3, type: 3}
 --- !u!4 &744689320212064631 stripped

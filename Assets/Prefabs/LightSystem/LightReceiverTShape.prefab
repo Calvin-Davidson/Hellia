@@ -91,7 +91,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   shouldObjectLookAtMe: 1
-  maxPushableAtOnce: 1
   moveSpeed: 4
   canBePushed: 1
 --- !u!114 &1270002793291970987
@@ -178,7 +177,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 785fa532615192040bd7231dbb48fda2, type: 2}
+  - {fileID: 2100000, guid: 3e786cf512ec541429e104b9da5d14e7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -266,11 +265,11 @@ PrefabInstance:
     - target: {fileID: -6692673692092021873, guid: 5573821fb1fe535498e2b79320f4c4f3, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1047467739672655873, guid: c2f002ed15474944883860e89187cde2, type: 3}
+      objectReference: {fileID: 1047467739672655873, guid: ff6c9fa41529f5f4092b59be51d24021, type: 3}
     - target: {fileID: -4714766789449801292, guid: 5573821fb1fe535498e2b79320f4c4f3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 785fa532615192040bd7231dbb48fda2, type: 2}
+      objectReference: {fileID: 2100000, guid: 3e786cf512ec541429e104b9da5d14e7, type: 2}
     - target: {fileID: 919132149155446097, guid: 5573821fb1fe535498e2b79320f4c4f3, type: 3}
       propertyPath: m_Name
       value: Crystal_Stoneblock_Lshape
@@ -278,11 +277,11 @@ PrefabInstance:
     - target: {fileID: 5790665468742227225, guid: 5573821fb1fe535498e2b79320f4c4f3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: dc6d895553fefc54ea7d4f38a372857e, type: 2}
+      objectReference: {fileID: 2100000, guid: 3ec3fdd3871f1164e9e488bedf47665d, type: 2}
     - target: {fileID: 5801446643847624186, guid: 5573821fb1fe535498e2b79320f4c4f3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 785fa532615192040bd7231dbb48fda2, type: 2}
+      objectReference: {fileID: 2100000, guid: 3e786cf512ec541429e104b9da5d14e7, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5573821fb1fe535498e2b79320f4c4f3, type: 3}
 --- !u!4 &6471325131563142432 stripped

@@ -13,12 +13,12 @@ namespace Runtime.Movables
         [SerializeField] private LayerMask pushableByLayers;
         [SerializeField] private LayerMask holeLayer;
         [SerializeField] private bool shouldObjectLookAtMe;
-        [SerializeField, Range(1, 2)] private int maxPushableAtOnce = 1;
         [SerializeField] private float moveSpeed = 1f;
 
         public bool canBePushed = true;
 
         private const float RotationTolerance = 20;
+     
         private const int MoveDistance = 4;
         private const int holeDistance = 4;
         private const String HoleLayerName = "Hole";
@@ -39,24 +39,6 @@ namespace Runtime.Movables
             {
                 MoveTo(transform.position + direction);
                 return;
-            }
-
-            // Multiple pushable 
-            if (collisionCount >= 1)
-            {
-                if (maxPushableAtOnce <= 1)
-                    return;
-
-                MovableBlock result = colliders[0].gameObject.GetComponent<MovableBlock>();
-                if (result != null)
-                {
-                    bool canBePushed = result.CanBePushed(direction);
-                    if (canBePushed)
-                    {
-                        result.MoveTo(result.gameObject.transform.position + direction);
-                        MoveTo(transform.position + direction);
-                    }
-                }
             }
         }
 
@@ -114,9 +96,12 @@ namespace Runtime.Movables
 
                 float xDifference = contactDirection.x;
                 float zDifference = contactDirection.z;
+                float yDifference = contactDirection.y;
 
                 // you are now allowed to push the corners.
                 if (Math.Abs(math.abs(xDifference) - math.abs(zDifference)) < cornerTolerance) return;
+                Debug.Log(yDifference);
+                if (yDifference < 0) return;
 
                 // Collision was on the X axis
                 if (math.abs(xDifference) > math.abs(zDifference))
