@@ -13,7 +13,6 @@ namespace Runtime.Movables
         [SerializeField] private LayerMask pushableByLayers;
         [SerializeField] private LayerMask holeLayer;
         [SerializeField] private bool shouldObjectLookAtMe;
-        [SerializeField, Range(1, 2)] private int maxPushableAtOnce = 1;
         [SerializeField] private float moveSpeed = 1f;
 
         public bool canBePushed = true;
@@ -40,24 +39,6 @@ namespace Runtime.Movables
             {
                 MoveTo(transform.position + direction);
                 return;
-            }
-
-            // Multiple pushable 
-            if (collisionCount >= 1)
-            {
-                if (maxPushableAtOnce <= 1)
-                    return;
-
-                MovableBlock result = colliders[0].gameObject.GetComponent<MovableBlock>();
-                if (result != null)
-                {
-                    bool canBePushed = result.CanBePushed(direction);
-                    if (canBePushed)
-                    {
-                        result.MoveTo(result.gameObject.transform.position + direction);
-                        MoveTo(transform.position + direction);
-                    }
-                }
             }
         }
 
