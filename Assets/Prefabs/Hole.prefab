@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8849115680109293589}
   - component: {fileID: 581982111249890442}
-  - component: {fileID: 4594857864808986144}
   - component: {fileID: 9191207348974836142}
+  - component: {fileID: 6253046274239479414}
   m_Layer: 9
   m_Name: Hole
   m_TagString: Untagged
@@ -55,36 +55,6 @@ MonoBehaviour:
   useInputKey: 1
   useNextLevelEvent: 0
   useResetLevelEvent: 0
---- !u!114 &4594857864808986144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 466131314840631776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 944db67d41cab2b45b3a595d93c9243c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  onTriggerEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 581982111249890442}
-        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: ResetCurrentScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!65 &9191207348974836142
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -98,6 +68,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10.156541, y: 5.525769, z: 10.199757}
   m_Center: {x: -0.03890276, y: -7.237062, z: 0.01922369}
+--- !u!114 &6253046274239479414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466131314840631776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b491909f53576a4c94924a21ee05940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1668730178875385072
 GameObject:
   m_ObjectHideFlags: 0

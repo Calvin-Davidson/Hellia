@@ -19,7 +19,7 @@ public class SceneLoader : MonoBehaviour
         }
         if (useResetLevelEvent)
         {
-            GameControl.Instance.onResetLevel?.AddListener(LoadLevel);
+            GameControl.Instance.onResetLevel?.AddListener(ResetCurrentScene);
         }
     }
     // Update is called once per frame
