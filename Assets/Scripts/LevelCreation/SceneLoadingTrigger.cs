@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class SceneLoadingTrigger : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class SceneLoadingTrigger : MonoBehaviour
     {
         if (IsInLayer(collision.gameObject.layer, playerMask))
         {
+            LevelSystem.SetLevelCompleted(SceneManager.GetActiveScene().name);
             GameControl.Instance.onNextLevel?.Invoke();
         }
     }
