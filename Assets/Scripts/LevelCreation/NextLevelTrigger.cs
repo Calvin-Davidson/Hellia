@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-public class SceneLoadingTrigger : MonoBehaviour
+public class NextLevelTrigger : MonoBehaviour
 {
     [SerializeField] private LayerMask playerMask;
     void OnTriggerEnter(Collider collision)

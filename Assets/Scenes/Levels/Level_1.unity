@@ -398,6 +398,10 @@ PrefabInstance:
       propertyPath: sceneName
       value: Level_2
       objectReference: {fileID: 0}
+    - target: {fileID: 6426961108767637938, guid: abeab709dd9c67e469a381b959af8862, type: 3}
+      propertyPath: useResetLevelEvent
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6426961108767637939, guid: abeab709dd9c67e469a381b959af8862, type: 3}
       propertyPath: sceneName
       value: Level_1
@@ -450,7 +454,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneLoadingTrigger
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6426961108767637939, guid: abeab709dd9c67e469a381b959af8862, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: abeab709dd9c67e469a381b959af8862, type: 3}
 --- !u!1001 &183865343
 PrefabInstance:
