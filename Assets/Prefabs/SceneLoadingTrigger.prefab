@@ -95,8 +95,8 @@ MonoBehaviour:
   inputKey: r
   sceneName: Level_
   useInputKey: 1
-  useNextLevelEvent: 0
-  useResetLevelEvent: 0
+  useNextLevelEvent: 1
+  useResetLevelEvent: 1
 --- !u!54 &6426961108767637937
 Rigidbody:
   m_ObjectHideFlags: 0
