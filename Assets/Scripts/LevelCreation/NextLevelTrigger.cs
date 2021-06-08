@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
-public class SceneLoadingTrigger : MonoBehaviour
+public class NextLevelTrigger : MonoBehaviour
 {
     [SerializeField] private LayerMask playerMask;
     void OnTriggerEnter(Collider collision)
     {
         if (IsInLayer(collision.gameObject.layer, playerMask))
         {
+            LevelSystem.SetLevelCompleted(SceneManager.GetActiveScene().name);
             GameControl.Instance.onNextLevel?.Invoke();
         }
     }
