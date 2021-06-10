@@ -242,7 +242,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 180084625}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.043, y: 0.135, z: 0.042}
+  m_LocalPosition: {x: 0.043, y: 0.024, z: 0.042}
   m_LocalScale: {x: 4.1502457, y: 4.1502457, z: 4.1502457}
   m_Children: []
   m_Father: {fileID: 1961370772}
@@ -14739,7 +14739,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1961370769}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.2, y: 2.61, z: 11.88}
+  m_LocalPosition: {x: -0.2, y: 2.61, z: 11.477}
   m_LocalScale: {x: 4.485756, y: 4.485756, z: 4.316329}
   m_Children:
   - {fileID: 846684738}
@@ -14813,6 +14813,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b594a8266b8aaf447bc4a8b7e834c45c, type: 3}
       propertyPath: m_Name
       value: Portal
+      objectReference: {fileID: 0}
+    - target: {fileID: 958037937365359995, guid: b594a8266b8aaf447bc4a8b7e834c45c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3018731287659186233, guid: b594a8266b8aaf447bc4a8b7e834c45c, type: 3}
       propertyPath: m_LocalScale.z
