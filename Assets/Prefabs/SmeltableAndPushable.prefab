@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2105174165174007564}
   - component: {fileID: 2105174165562436914}
   - component: {fileID: 1104868124526800473}
+  - component: {fileID: 8512340040445116036}
   m_Layer: 8
   m_Name: SmeltableAndPushable
   m_TagString: Untagged
@@ -153,7 +154,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   shouldObjectLookAtMe: 1
-  maxPushableAtOnce: 1
   moveSpeed: 4
   canBePushed: 1
 --- !u!114 &1104868124526800473
@@ -169,3 +169,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   surface: 2
+--- !u!114 &8512340040445116036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105174165174007562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931ca97a3a04616489078e9f121bbe75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds: {fileID: 11400000, guid: 1e4c7bf072cc0234884ddbf04e469993, type: 2}
+  defaultClip: {fileID: 8300000, guid: acf1623d0e03dfd41a0e951cc8ab9147, type: 3}
