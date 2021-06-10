@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class DynamicPostProcessingFade : MonoBehaviour
 {
-    [SerializeField] private float lerpSpeed;
+    [SerializeField] private float lerpSpeed = 0.5f;
     [SerializeField] private PostProcessingShader postProcessingEffect = null;
     private Material materialReference = null;
     [SerializeField] private List<string> keys = new List<string>();
@@ -13,11 +13,6 @@ public class DynamicPostProcessingFade : MonoBehaviour
     [SerializeField] private List<float> valuesMax = new List<float>();
     static float t = 0.0f;
     void Start()
-    {
-        ResetPostProcessing();
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         ResetPostProcessing();
     }
