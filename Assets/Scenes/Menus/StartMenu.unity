@@ -859,6 +859,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelSelectionButton (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7114701038041237059, guid: 0b44ae87ea05cb447ba2ec49183dbd4b, type: 3}
+      propertyPath: levelId
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b44ae87ea05cb447ba2ec49183dbd4b, type: 3}
 --- !u!224 &321722889 stripped
@@ -1292,6 +1296,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelSelectionButton (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7114701038041237059, guid: 0b44ae87ea05cb447ba2ec49183dbd4b, type: 3}
+      propertyPath: levelId
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b44ae87ea05cb447ba2ec49183dbd4b, type: 3}
 --- !u!224 &527541557 stripped
@@ -1501,6 +1509,10 @@ PrefabInstance:
     - target: {fileID: 2526933029349653960, guid: 0b44ae87ea05cb447ba2ec49183dbd4b, type: 3}
       propertyPath: m_Name
       value: LevelSelectionButton (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7114701038041237059, guid: 0b44ae87ea05cb447ba2ec49183dbd4b, type: 3}
+      propertyPath: levelId
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b44ae87ea05cb447ba2ec49183dbd4b, type: 3}
@@ -3248,6 +3260,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelSelectionButton (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7114701038041237059, guid: 0b44ae87ea05cb447ba2ec49183dbd4b, type: 3}
+      propertyPath: levelId
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b44ae87ea05cb447ba2ec49183dbd4b, type: 3}
 --- !u!224 &1572966561 stripped
@@ -3478,6 +3494,10 @@ PrefabInstance:
     - target: {fileID: 2526933029349653960, guid: 0b44ae87ea05cb447ba2ec49183dbd4b, type: 3}
       propertyPath: m_Name
       value: LevelSelectionButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7114701038041237059, guid: 0b44ae87ea05cb447ba2ec49183dbd4b, type: 3}
+      propertyPath: levelId
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b44ae87ea05cb447ba2ec49183dbd4b, type: 3}
