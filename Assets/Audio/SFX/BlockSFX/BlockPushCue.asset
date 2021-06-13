@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 500bae11454246a4a8a481185afdd435, type: 3}
+  m_Name: BlockPushCue
+  m_EditorClassIdentifier: 
+  surface: 0
+  clips:
+  - {fileID: 8300000, guid: acf1623d0e03dfd41a0e951cc8ab9147, type: 3}
+  - {fileID: 8300000, guid: 3b084d582f2c3184ba5fcb4cb6a6c8ad, type: 3}
