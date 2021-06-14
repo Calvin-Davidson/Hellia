@@ -7,8 +7,10 @@ using UnityEngine.Events;
 [RequireComponent(typeof(AudioSource))]
 public class LevelSelectionButton : MonoBehaviour, IPointerClickHandler
 {
-    public AudioClip ButtonDenySound;
+    public SoundLibrary ButtonAcceptCue;
     public AudioClip ButtonAcceptSound;
+    public SoundLibrary ButtonDenyCue;
+    public AudioClip ButtonDenySound;
 
     public GameObject activeEffect;
     public GameObject inactiveEffect;
@@ -25,8 +27,10 @@ public class LevelSelectionButton : MonoBehaviour, IPointerClickHandler
         audioSource = GetComponent<AudioSource>();
         if (LevelSystem.HasFinishedLevel("Level_" + (levelId - 1)) || levelId == 1)
         {
-            Debug.Log("noice");
             audioSource.clip = ButtonAcceptSound;
+            System.Random rnd = new System.Random();
+            int index = rnd.Next(1, ButtonAcceptCue.clips.Length);
+            audioSource.clip = ButtonAcceptCue.clips[index];
             if (activeEffect != null) activeEffect.SetActive(true);
             if (inactiveEffect != null) inactiveEffect.SetActive(false);
             isActive = true;
@@ -38,7 +42,10 @@ public class LevelSelectionButton : MonoBehaviour, IPointerClickHandler
             if (activeEffect != null) activeEffect.SetActive(false);
             if (inactiveEffect != null) inactiveEffect.SetActive(true);
 
-            audioSource.clip = ButtonAcceptSound;
+            audioSource.clip = ButtonDenySound;
+            System.Random rnd = new System.Random();
+            int index = rnd.Next(1, ButtonDenyCue.clips.Length);
+            audioSource.clip = ButtonDenyCue.clips[index];
             OnSetInactive?.Invoke();
         }
     }
