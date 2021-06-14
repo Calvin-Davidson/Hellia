@@ -14,7 +14,14 @@ public class DynamicPostProcessingFade : MonoBehaviour
     static float t = 0.0f;
     void Start()
     {
-        ResetPostProcessing();
+        if(t >= 0.2)
+        {
+            StartCoroutine("DelayedReset");
+        }
+        else
+        {
+            ResetPostProcessing();
+        }
     }
 
         // Update is called once per frame
@@ -39,5 +46,11 @@ public class DynamicPostProcessingFade : MonoBehaviour
             materialReference.SetFloat(keys[i], valuesMin[i]);
         }
         t = 0.0f;
+    }
+
+    IEnumerator DelayedReset()
+    {
+        yield return new WaitForSeconds(0.7f);
+        ResetPostProcessing();
     }
 }

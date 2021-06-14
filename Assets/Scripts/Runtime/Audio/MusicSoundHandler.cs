@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPushSoundHandler : MonoBehaviour
+public class MusicSoundHandler : MonoBehaviour
 {
     [SerializeField] private SoundLibrary sounds;
     [SerializeField] private AudioClip defaultClip;
@@ -10,15 +10,21 @@ public class PlayerPushSoundHandler : MonoBehaviour
     void Start()
     {
         source = this.GetComponent<AudioSource>();
-        GameControl.Instance.onBlockPushed?.AddListener(OnPushed);
     }
 
-    void OnPushed()
+    void Update()
+    {
+        if (!source.isPlaying)
+        {
+            SelectNewClip();
+            source.Play();
+        }
+    }
+    void SelectNewClip()
     {
         source.clip = defaultClip;
         System.Random rnd = new System.Random();
         int index = rnd.Next(1, sounds.clips.Length);
         source.clip = sounds.clips[index];
-        source.Play();
     }
 }
