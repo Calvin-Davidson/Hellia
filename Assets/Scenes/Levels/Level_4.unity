@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18154663, g: 0.22718959, b: 0.30740538, a: 1}
+  m_IndirectSpecularColor: {r: 0.18154702, g: 0.22719009, b: 0.30740646, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7573,8 +7573,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneLoadingTrigger
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6426961108767637938, guid: abeab709dd9c67e469a381b959af8862, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abeab709dd9c67e469a381b959af8862, type: 3}
 --- !u!1001 &1468526359
 PrefabInstance:
@@ -9318,8 +9317,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1802099216}
-  - component: {fileID: 1802099217}
-  - component: {fileID: 1802099215}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -9327,23 +9324,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1802099215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1802099214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d952e01e8ce39e4292cce3f8a0e85ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputKey: r
-  sceneName: Level_4
-  useInputKey: 1
-  useNextLevelEvent: 0
-  useResetLevelEvent: 0
 --- !u!4 &1802099216
 Transform:
   m_ObjectHideFlags: 0
@@ -9510,23 +9490,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1802099217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1802099214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d952e01e8ce39e4292cce3f8a0e85ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputKey: space
-  sceneName: Level_5
-  useInputKey: 1
-  useNextLevelEvent: 0
-  useResetLevelEvent: 0
 --- !u!1001 &1826048340
 PrefabInstance:
   m_ObjectHideFlags: 0
