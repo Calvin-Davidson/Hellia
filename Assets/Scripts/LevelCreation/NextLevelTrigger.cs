@@ -12,7 +12,7 @@ public class NextLevelTrigger : MonoBehaviour
         if (IsInLayer(collision.gameObject.layer, playerMask))
         {
             LevelSystem.SetLevelCompleted(SceneManager.GetActiveScene().name);
-            GameControl.Instance.onNextLevel?.Invoke();
+            GameControl.Instance.onNextLevel.Invoke();
         }
     }
     public static bool IsInLayer(int layer, LayerMask layermask)
