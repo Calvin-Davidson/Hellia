@@ -51,6 +51,8 @@ public class UIRaycastEvents : MonoBehaviour
                 {
                     MouseClick?.Invoke();
                 }
+
+                break;
             }
         }
 
