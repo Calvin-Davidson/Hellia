@@ -160,7 +160,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -257,8 +257,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 117799da3d6edc443a7a065e92ca16f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonDenySound: {fileID: 0}
-  ButtonAcceptSound: {fileID: 0}
+  ButtonAcceptCue: {fileID: 11400000, guid: a1845df7b186b5a4bb45b649d6776ccc, type: 2}
+  ButtonAcceptSound: {fileID: 8300000, guid: e68e2c38d6868e94e90f690949ecfb31, type: 3}
+  ButtonDenyCue: {fileID: 11400000, guid: 7618e460053e0de4e8dd4e6a8a7a5e08, type: 2}
+  ButtonDenySound: {fileID: 8300000, guid: 56395e0d9b9bc4e41bda680c71eaaad7, type: 3}
   activeEffect: {fileID: 0}
   inactiveEffect: {fileID: 4010659351907103084}
   levelId: 0
