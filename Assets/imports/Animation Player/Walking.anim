@@ -56338,7 +56338,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 2
+  - time: 1.7083334
     functionName: PlayWalkSound
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: af8abd87a4401a243a77e1ff825e856d, type: 3}
