@@ -31,12 +31,14 @@ namespace Runtime.Movables
             int collisionCount = Physics.OverlapBoxNonAlloc(transform.position + direction, blockSize, colliders, Quaternion.identity, allLayers, QueryTriggerInteraction.Ignore);
             if (collisionCount == 0 && !shouldObjectLookAtMe)
             {
+                GameControl.Instance.onBlockStartMove?.Invoke();
                 MoveTo(transform.position + direction);
                 return;
             }
 
             if (collisionCount == 0 && IsLookingAtMe(collidedObject, direction))
             {
+                GameControl.Instance.onBlockStartMove?.Invoke();
                 MoveTo(transform.position + direction);
                 return;
             }
@@ -100,7 +102,6 @@ namespace Runtime.Movables
 
                 // you are now allowed to push the corners.
                 if (Math.Abs(math.abs(xDifference) - math.abs(zDifference)) < cornerTolerance) return;
-                Debug.Log(yDifference);
                 if (yDifference < 0) return;
 
                 // Collision was on the X axis
