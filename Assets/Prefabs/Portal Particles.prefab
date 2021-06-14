@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6490443296237071094}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: -0.25665915, y: -6.1410217, z: 1.8233919}
+  m_LocalPosition: {x: -0.25665915, y: -3.42, z: 1.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6490443296855496447}
@@ -4817,7 +4817,7 @@ GameObject:
   - component: {fileID: 6490443296855496446}
   - component: {fileID: 6490443296855496445}
   m_Layer: 0
-  m_Name: Basic symbol round
+  m_Name: Portal Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
