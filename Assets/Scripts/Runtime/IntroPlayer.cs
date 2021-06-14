@@ -10,16 +10,16 @@ public class IntroPlayer : MonoBehaviour
     public VideoPlayer videoPlayer;
     public string mainMenuSceneName;
 
-    public UnityEvent OnSceneLoaded = new UnityEvent();
+    public UnityEvent onSceneLoaded = new UnityEvent();
 
-    private bool _isDone = false;
-    private bool _skip = false;
-    private bool _sceneLoaded = false;
+    private bool isDone = false;
+    private bool isSkipped = false;
+    private bool isLoaded = false;
     private void Start()
     {
         videoPlayer.Play();
-        InvokeRepeating("checkOver", .1f, .1f);
-        StartCoroutine(loadSceneAsync());
+        InvokeRepeating(nameof(checkOver), .1f, .1f);
+        StartCoroutine(LoadSceneAsync());
     }
 
     private void checkOver()
@@ -30,33 +30,32 @@ public class IntroPlayer : MonoBehaviour
         if (playerCurrentFrame < playerFrameCount - 1)
             return;
 
-        _isDone = true;
-        CancelInvoke("checkOver");
-     
+        isDone = true;
+        CancelInvoke(nameof(checkOver));
     }
 
 
     public void Skip()
     {
-        _skip = true;
+        isSkipped = true;
     }
 
-    IEnumerator loadSceneAsync()
+    IEnumerator LoadSceneAsync()
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(mainMenuSceneName);
         asyncLoad.allowSceneActivation = false;
 
         // Wait until the asynchronous scene fully loads
-        while ((!asyncLoad.isDone && !_isDone) || !_skip)
+        while (asyncLoad.progress <= 0.9f && !isDone && !isSkipped)
         {
-            if (asyncLoad.isDone && !_sceneLoaded)
+            if (asyncLoad.progress >= 0.9f && !isLoaded)
             {
-                OnSceneLoaded?.Invoke();
-                _sceneLoaded = true;
-            }
-             yield return null;
+                Debug.Log("scene loaded");
+                onSceneLoaded?.Invoke();
+                isLoaded = true;
+            } 
+            yield return null;
         }
-
         asyncLoad.allowSceneActivation = true;
     }
 }
