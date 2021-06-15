@@ -504,19 +504,19 @@ PrefabInstance:
     - target: {fileID: -8546224745826658211, guid: f71001fa848b87949809a4fe45f3cc89, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: eaecbe7793532fa48abef4c73654d2ab, type: 2}
+      objectReference: {fileID: 2100000, guid: b0087e1281674b44581c8ac5427598ab, type: 2}
     - target: {fileID: -7515914237469173711, guid: f71001fa848b87949809a4fe45f3cc89, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: eaecbe7793532fa48abef4c73654d2ab, type: 2}
+      objectReference: {fileID: 2100000, guid: b0087e1281674b44581c8ac5427598ab, type: 2}
     - target: {fileID: -6245794268782822333, guid: f71001fa848b87949809a4fe45f3cc89, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 5161d63fde0e3a7498866f33eaa03c3c, type: 2}
+      objectReference: {fileID: 2100000, guid: 02f3b5eec609a3941b3421c14a08b2fa, type: 2}
     - target: {fileID: -6011529139048574878, guid: f71001fa848b87949809a4fe45f3cc89, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: eaecbe7793532fa48abef4c73654d2ab, type: 2}
+      objectReference: {fileID: 2100000, guid: b0087e1281674b44581c8ac5427598ab, type: 2}
     - target: {fileID: 919132149155446097, guid: f71001fa848b87949809a4fe45f3cc89, type: 3}
       propertyPath: m_Name
       value: Player animations 2
@@ -540,11 +540,11 @@ PrefabInstance:
     - target: {fileID: 3666933195317874593, guid: f71001fa848b87949809a4fe45f3cc89, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 5161d63fde0e3a7498866f33eaa03c3c, type: 2}
+      objectReference: {fileID: 2100000, guid: 8880374fe5ff66845937764d88743abe, type: 2}
     - target: {fileID: 4598137607251117431, guid: f71001fa848b87949809a4fe45f3cc89, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: eaecbe7793532fa48abef4c73654d2ab, type: 2}
+      objectReference: {fileID: 2100000, guid: b0087e1281674b44581c8ac5427598ab, type: 2}
     - target: {fileID: 7894715225948397464, guid: f71001fa848b87949809a4fe45f3cc89, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
