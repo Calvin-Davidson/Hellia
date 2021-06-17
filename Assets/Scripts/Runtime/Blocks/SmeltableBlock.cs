@@ -6,7 +6,7 @@ public class SmeltableBlock : MonoBehaviour, IBlock
 {
     [SerializeField, Range(2, 10)] private float requiredPlayerSmeltRange;
     [SerializeField] private float smeltTime = 2f;
-
+    [SerializeField] private ParticleSystem smeltParticle;
     [NonSerialized] public bool forceSmelt = false;
 
     private GameObject _player;
@@ -14,7 +14,7 @@ public class SmeltableBlock : MonoBehaviour, IBlock
     private Animator _animator;
     private TorchPower _torchPower;
 
-    
+
     private static readonly int Smelting = Animator.StringToHash("Smelting");
 
 
@@ -32,6 +32,8 @@ public class SmeltableBlock : MonoBehaviour, IBlock
         {
             _animator.SetBool(Smelting, true);
             _smeltedFor += Time.deltaTime;
+            if (!smeltParticle.isPlaying) smeltParticle.Play();
+
             if (_smeltedFor > smeltTime)
             {
                 OnUpdate();
@@ -40,6 +42,7 @@ public class SmeltableBlock : MonoBehaviour, IBlock
         }
         else
         {
+            smeltParticle.Stop();
             _animator.SetBool(Smelting, false);
         }
     }
