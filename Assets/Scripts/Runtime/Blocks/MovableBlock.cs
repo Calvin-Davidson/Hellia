@@ -21,10 +21,6 @@ namespace Runtime.Movables
         public bool canBePushed = true;
 
 
-        public bool canBePushed = true;
-
-
-
         private const float RotationTolerance = 20;
      
         private const int MoveDistance = 4;
