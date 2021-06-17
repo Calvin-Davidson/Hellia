@@ -14,7 +14,12 @@ public class DynamicPostProcessingFade : MonoBehaviour
     static float t = 0.0f;
     void Start()
     {
-        if(t >= 0.2)
+        if (postProcessingEffect == null)
+        {
+            return;
+        }
+        materialReference = postProcessingEffect.customRenderPass.materialReference;
+        if (t >= 0.2)
         {
             StartCoroutine("DelayedReset");
         }

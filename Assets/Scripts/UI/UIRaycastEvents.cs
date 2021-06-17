@@ -7,9 +7,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(GraphicRaycaster))]
 public class UIRaycastEvents : MonoBehaviour
 {
-    public UnityEvent MouseEnter = default;
-    public UnityEvent MouseExit = default;
-    public UnityEvent MouseClick = default;
+    public UnityEvent MouseEnter = new UnityEvent();
+    public UnityEvent MouseExit = new UnityEvent();
+    public UnityEvent MouseClick = new UnityEvent();
 
     private bool _IsMouseOver = false;
 
