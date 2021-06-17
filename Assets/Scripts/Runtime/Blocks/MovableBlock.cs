@@ -17,8 +17,8 @@ namespace Runtime.Movables
         [SerializeField] private float moveSpeed = 1f;
         [SerializeField] private GameObject particleParent;
         [SerializeField] private ParticleSystem pushPartice;
-        public bool canBePushed = true;
 
+        public bool canBePushed = true;
 
 
 
@@ -176,7 +176,7 @@ namespace Runtime.Movables
                 }
             }
 
-            if (isFree)
+            if (isFree || new FallableBlock().CheckShouldFall(transform)) 
             {
                 StartCoroutine(MoveObjectOverTime(gameObject, transform.position + new Vector3(0, -holeDistance, 0),
                     null));
