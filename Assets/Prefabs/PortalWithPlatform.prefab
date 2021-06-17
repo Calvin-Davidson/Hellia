@@ -315,6 +315,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3155781231734458533}
     m_Modifications:
+    - target: {fileID: 2561488845168592182, guid: 599da8d6032d74140bab0d5842ac6d69, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4531495333113517724, guid: 599da8d6032d74140bab0d5842ac6d69, type: 3}
       propertyPath: m_Name
       value: Portal
