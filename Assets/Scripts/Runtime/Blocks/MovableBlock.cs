@@ -21,6 +21,8 @@ namespace Runtime.Movables
         public bool canBePushed = true;
 
 
+        public bool canBePushed = true;
+
 
 
         private const float RotationTolerance = 20;
@@ -177,7 +179,7 @@ namespace Runtime.Movables
                 }
             }
 
-            if (isFree)
+            if (isFree || new FallableBlock().CheckShouldFall(transform)) 
             {
                 StartCoroutine(MoveObjectOverTime(gameObject, transform.position + new Vector3(0, -holeDistance, 0), holePartice.Play));
             }
