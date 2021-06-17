@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Runtime.Movables
 {
@@ -14,8 +15,12 @@ namespace Runtime.Movables
         [SerializeField] private LayerMask holeLayer;
         [SerializeField] private bool shouldObjectLookAtMe;
         [SerializeField] private float moveSpeed = 1f;
-
+        [SerializeField] private GameObject particleParent;
+        [SerializeField] private ParticleSystem pushPartice;
         public bool canBePushed = true;
+
+
+
 
         private const float RotationTolerance = 20;
      
@@ -31,6 +36,7 @@ namespace Runtime.Movables
             int collisionCount = Physics.OverlapBoxNonAlloc(transform.position + direction, blockSize, colliders, Quaternion.identity, allLayers, QueryTriggerInteraction.Ignore);
             if (collisionCount == 0 && !shouldObjectLookAtMe)
             {
+                DoPushParticle(direction);
                 GameControl.Instance.onBlockStartMove?.Invoke();
                 MoveTo(transform.position + direction);
                 return;
@@ -38,18 +44,38 @@ namespace Runtime.Movables
 
             if (collisionCount == 0 && IsLookingAtMe(collidedObject, direction))
             {
+                DoPushParticle(direction);
                 GameControl.Instance.onBlockStartMove?.Invoke();
                 MoveTo(transform.position + direction);
                 return;
             }
         }
 
-        private bool CanBePushed(Vector3 direction)
+
+        public void DoPushParticle(Vector3 pushDirection)
         {
-            LayerMask allLayers = ~0;
-            int collisionCount = Physics.OverlapBoxNonAlloc(transform.position + direction, blockSize, new Collider[1],
-                Quaternion.identity, allLayers, QueryTriggerInteraction.Ignore);
-            return (collisionCount == 0);
+            if (pushPartice == null) return;
+
+            if (pushDirection.x >= MoveDistance)
+            {
+                particleParent.transform.rotation = Quaternion.Euler(0, -90, 0);
+            }
+            if (pushDirection.x <= -MoveDistance) {
+                particleParent.transform.rotation = Quaternion.Euler(0, 90, 0);
+            };
+
+            if (pushDirection.z >= MoveDistance)
+            {
+                particleParent.transform.rotation = Quaternion.Euler(0, 180, 0);
+            };
+
+            if (pushDirection.z <= -MoveDistance)
+            {
+                particleParent.transform.rotation = Quaternion.Euler(0, 0, 0);
+            };
+
+
+            pushPartice.Play();
         }
 
         private bool IsLookingAtMe(GameObject other, Vector3 pushDirection)
