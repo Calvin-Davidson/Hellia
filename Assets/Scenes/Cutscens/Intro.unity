@@ -431,7 +431,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1055695407}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -503,7 +503,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -16.9, y: 11.1}
+  m_AnchoredPosition: {x: -16.900024, y: 11.100006}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1326058400
@@ -694,7 +694,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1520993498}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 8b7ff9f6d05fd9e4a9891c11c3ac22fc, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 5597a7ed787620b40a3d8cfadde55299, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 526431469}
