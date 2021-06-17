@@ -4817,7 +4817,7 @@ GameObject:
   - component: {fileID: 6490443296855496446}
   - component: {fileID: 6490443296855496445}
   m_Layer: 0
-  m_Name: Portal Particles
+  m_Name: P_Portal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
