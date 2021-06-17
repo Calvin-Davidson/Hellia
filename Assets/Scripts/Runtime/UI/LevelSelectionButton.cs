@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 public class LevelSelectionButton : MonoBehaviour, IPointerClickHandler
@@ -25,7 +26,7 @@ public class LevelSelectionButton : MonoBehaviour, IPointerClickHandler
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        if (LevelSystem.HasFinishedLevel("Level_" + (levelId - 1)) || levelId == 1)
+        if (LevelSystem.HasFinishedLevel("Level_" + (levelId - 1)) || levelId == 1 || LevelSystem.HasFinishedLevel("Level_" + levelId))
         {
             audioSource.clip = ButtonAcceptSound;
             System.Random rnd = new System.Random();
@@ -54,8 +55,8 @@ public class LevelSelectionButton : MonoBehaviour, IPointerClickHandler
         if (audioSource.clip != null) audioSource.Play();
 
         if (isActive)
-        {
-            GameControl.Instance.LoadLevel(levelId);
+        { 
+            SceneManager.LoadScene("Level_" + levelId);
         }
     }
 }

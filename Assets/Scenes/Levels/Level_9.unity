@@ -2532,7 +2532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8849115680109293589, guid: 6bad84c89a1c0dd4982e19b49d74096e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8849115680109293589, guid: 6bad84c89a1c0dd4982e19b49d74096e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5318,7 +5318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8849115680109293589, guid: 6bad84c89a1c0dd4982e19b49d74096e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8849115680109293589, guid: 6bad84c89a1c0dd4982e19b49d74096e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7084,7 +7084,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6426961108767637938, guid: abeab709dd9c67e469a381b959af8862, type: 3}
       propertyPath: sceneName
-      value: Level_1
+      value: Outro
       objectReference: {fileID: 0}
     - target: {fileID: 6426961108767637939, guid: abeab709dd9c67e469a381b959af8862, type: 3}
       propertyPath: sceneName
