@@ -63,14 +63,9 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         });
         foreach (var component in sendingTo)
         {
-            try
-            {
-                ILightReceiver receiver = (ILightReceiver) component;
-                receiver.LightReceive(this);
-            }
-            catch (InvalidCastException e)
-            {
-            }
+            if (!IsLightReceiver(component)) continue;
+            ILightReceiver receiver = (ILightReceiver)component;
+            receiver.LightDisconnect(this);
         }
     }
 
@@ -103,14 +98,9 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         
         foreach (var component in sendingTo)
         {
-            try
-            {
+            if (!IsLightReceiver(component)) continue;
                 ILightReceiver receiver = (ILightReceiver) component;
                 receiver.LightDisconnect(this);
-            }
-            catch (InvalidCastException e)
-            {
-            }
         }
         sendingTo.Clear();
     }
@@ -163,8 +153,21 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         beam.transform.localScale = currentScale;
     }
 
+    private bool IsLightReceiver(ILightComponent component)
+    {
+        try
+        {
+            ILightReceiver receiver = (ILightReceiver)component;
+            return true;
+        }
+        catch (InvalidCastException)
+        {
+            return false;
+        }
+    }
 
-    #region Editor methodes
+
+#region Editor methodes
 #if (UNITY_EDITOR)
 
     public void InstantiateBeams()

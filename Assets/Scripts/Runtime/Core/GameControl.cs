@@ -7,19 +7,15 @@ using UnityEngine.Events;
 public class GameControl : MonoBehaviour
 {
     private static GameControl instance;
-    public UnityEvent onBlockUpdate;
-    public UnityEvent onBlockPushed;
-    public UnityEvent onNextLevel;
-    public UnityEvent onResetLevel;
+    public UnityEvent onBlockUpdate = new UnityEvent();
+    public UnityEvent onBlockPushed = new UnityEvent();
+    public UnityEvent onNextLevel = new UnityEvent();
+    public UnityEvent onResetLevel = new UnityEvent();
+    public UnityEvent onBlockStartMove = new UnityEvent();
     private void Awake()
     {
-
         if (instance != null) return;
         instance = this;
-        onBlockUpdate = new UnityEvent();
-        onBlockPushed = new UnityEvent();
-        onNextLevel = new UnityEvent();
-        onResetLevel = new UnityEvent();
     }
 
     public void BlockUpdateNextFrame()
