@@ -63,9 +63,14 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         });
         foreach (var component in sendingTo)
         {
-            if (!IsLightReceiver(component)) continue;
-            ILightReceiver receiver = (ILightReceiver)component;
-            receiver.LightDisconnect(this);
+            try
+            {
+                ILightReceiver receiver = (ILightReceiver) component;
+                receiver.LightReceive(this);
+            }
+            catch (InvalidCastException e)
+            {
+            }
         }
     }
 
@@ -98,9 +103,14 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         
         foreach (var component in sendingTo)
         {
-            if (!IsLightReceiver(component)) continue;
+            try
+            {
                 ILightReceiver receiver = (ILightReceiver) component;
                 receiver.LightDisconnect(this);
+            }
+            catch (InvalidCastException e)
+            {
+            }
         }
         sendingTo.Clear();
     }
@@ -153,22 +163,8 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         beam.transform.localScale = currentScale;
     }
 
-    private bool IsLightReceiver(ILightComponent component)
-    {
-        try
-        {
-            ILightReceiver receiver = (ILightReceiver)component;
-            return true;
-        }
-        catch (InvalidCastException)
-        {
-            return false;
-        }
-    }
 
-
-#region Editor methodes
-#if (UNITY_EDITOR)
+    #region Editor methodes
 
     public void InstantiateBeams()
     {
@@ -196,10 +192,9 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         newObject.transform.localRotation = Quaternion.Euler(rotation);
         newObject.transform.localScale = beamPrefab.transform.localScale;
         return newObject;
-    }
+    }    
 
-#endif
-#endregion
+    #endregion
 
     public GameObject GetGameObject()
     {
