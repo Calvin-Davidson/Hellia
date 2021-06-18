@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 500bae11454246a4a8a481185afdd435, type: 3}
+  m_Name: SC_BlockHoleLanding
+  m_EditorClassIdentifier: 
+  surface: 0
+  clips:
+  - {fileID: 8300000, guid: cc5f39596c291f645b1ae7ee2c9ee449, type: 3}
+  - {fileID: 8300000, guid: 6a9a86bee614173499c36b436a4187bb, type: 3}
+  - {fileID: 8300000, guid: e499538d020bd8a4da400393913c07b7, type: 3}
+  - {fileID: 8300000, guid: 1a46c8709b409d441a12b43b8100fe34, type: 3}
+  - {fileID: 8300000, guid: c2ee0020344331f4882860a2e730892d, type: 3}
+  - {fileID: 8300000, guid: 0ceab6bb849651840a91631fad048472, type: 3}
+  - {fileID: 8300000, guid: 155f356b55503b445bd53707fe4679ae, type: 3}
+  - {fileID: 8300000, guid: ddbae025098e20b4aab4a78fa38bf1bf, type: 3}
