@@ -27,8 +27,6 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
     private List<ILightComponent> sendingTo = new List<ILightComponent>();
     private ILightComponent receivingFrom;
 
-    public int receivingFromAmouth = 0;
-
     public void LightReceive(ILightComponent lightComponent)
     {
         if (receivingFrom != null && receivingFrom != lightComponent) return;
@@ -37,7 +35,7 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         List<ILightComponent> prevSendingTo = new List<ILightComponent>();
         sendingTo.ForEach(component => prevSendingTo.Add(component));
         sendingTo.Clear();
-
+        
         if (dir.Equals(Vector3.right) && beamRight)
             FixReceiverBeams(right);
         if (dir.Equals(Vector3.forward) && beamForward)
@@ -46,6 +44,8 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
             FixReceiverBeams(backward);
         if (dir.Equals(Vector3.left) && beamLeft)
             FixReceiverBeams(left);
+
+        this.receivingFrom = lightComponent;
         
         prevSendingTo.ForEach(component =>
         {
@@ -60,17 +60,17 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
                 {
                 }
             }
-
-            sendingTo.ForEach((value) =>
-            {
-                if (IsLightReceiver(value)) ((ILightReceiver) value).LightReceive(this);
-            });
         });
         foreach (var component in sendingTo)
         {
-            if (!IsLightReceiver(component)) continue;
-            ILightReceiver receiver = (ILightReceiver)component;
-            receiver.LightDisconnect(this);
+            try
+            {
+                ILightReceiver receiver = (ILightReceiver) component;
+                receiver.LightReceive(this);
+            }
+            catch (InvalidCastException e)
+            {
+            }
         }
     }
 
@@ -103,9 +103,14 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         
         foreach (var component in sendingTo)
         {
-            if (!IsLightReceiver(component)) continue;
+            try
+            {
                 ILightReceiver receiver = (ILightReceiver) component;
                 receiver.LightDisconnect(this);
+            }
+            catch (InvalidCastException e)
+            {
+            }
         }
         sendingTo.Clear();
     }
@@ -130,12 +135,7 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
 
         if (closest.collider.gameObject.TryGetComponent(out ILightComponent lightComponent))
         {
-            if (!sendingTo.Contains(lightComponent))
-            {
-                Debug.Log("closests: " + closest.collider.gameObject.name);
-                Debug.Log("sending light");
-                sendingTo.Add(lightComponent);
-            }
+            if (!sendingTo.Contains(lightComponent)) sendingTo.Add(lightComponent);
         }
 
         if (closest.collider.gameObject.TryGetComponent(out SmeltableBlock smeltableBlock))
@@ -163,22 +163,8 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         beam.transform.localScale = currentScale;
     }
 
-    private bool IsLightReceiver(ILightComponent component)
-    {
-        try
-        {
-            ILightReceiver receiver = (ILightReceiver)component;
-            return true;
-        }
-        catch (InvalidCastException)
-        {
-            return false;
-        }
-    }
 
-
-#region Editor methodes
-#if (UNITY_EDITOR)
+    #region Editor methodes
 
     public void InstantiateBeams()
     {
@@ -206,10 +192,9 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         newObject.transform.localRotation = Quaternion.Euler(rotation);
         newObject.transform.localScale = beamPrefab.transform.localScale;
         return newObject;
-    }
+    }    
 
-#endif
-#endregion
+    #endregion
 
     public GameObject GetGameObject()
     {
