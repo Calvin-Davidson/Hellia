@@ -27,6 +27,8 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
     private List<ILightComponent> sendingTo = new List<ILightComponent>();
     private ILightComponent receivingFrom;
 
+    public int receivingFromAmouth = 0;
+
     public void LightReceive(ILightComponent lightComponent)
     {
         if (receivingFrom != null && receivingFrom != lightComponent) return;
@@ -35,7 +37,7 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         List<ILightComponent> prevSendingTo = new List<ILightComponent>();
         sendingTo.ForEach(component => prevSendingTo.Add(component));
         sendingTo.Clear();
-        
+
         if (dir.Equals(Vector3.right) && beamRight)
             FixReceiverBeams(right);
         if (dir.Equals(Vector3.forward) && beamForward)
@@ -44,8 +46,6 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
             FixReceiverBeams(backward);
         if (dir.Equals(Vector3.left) && beamLeft)
             FixReceiverBeams(left);
-
-        this.receivingFrom = lightComponent;
         
         prevSendingTo.ForEach(component =>
         {
@@ -60,6 +60,11 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
                 {
                 }
             }
+
+            sendingTo.ForEach((value) =>
+            {
+                if (IsLightReceiver(value)) ((ILightReceiver) value).LightReceive(this);
+            });
         });
         foreach (var component in sendingTo)
         {
@@ -125,7 +130,12 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
 
         if (closest.collider.gameObject.TryGetComponent(out ILightComponent lightComponent))
         {
-            if (!sendingTo.Contains(lightComponent)) sendingTo.Add(lightComponent);
+            if (!sendingTo.Contains(lightComponent))
+            {
+                Debug.Log("closests: " + closest.collider.gameObject.name);
+                Debug.Log("sending light");
+                sendingTo.Add(lightComponent);
+            }
         }
 
         if (closest.collider.gameObject.TryGetComponent(out SmeltableBlock smeltableBlock))
