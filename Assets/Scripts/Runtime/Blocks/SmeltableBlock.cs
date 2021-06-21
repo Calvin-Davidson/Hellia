@@ -16,7 +16,7 @@ public class SmeltableBlock : MonoBehaviour, IBlock
 
 
     private static readonly int Smelting = Animator.StringToHash("Smelting");
-
+    private static readonly float ForceSmeltMultiplier = 2.8f;
 
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class SmeltableBlock : MonoBehaviour, IBlock
         if ((distance < requiredPlayerSmeltRange && Input.GetKey(KeyCode.E) && _torchPower.IsBurning()) || forceSmelt)
         {
             _animator.SetBool(Smelting, true);
-            _smeltedFor += Time.deltaTime;
+            _smeltedFor += (forceSmelt) ? Time.deltaTime * ForceSmeltMultiplier : Time.deltaTime;
             if (!smeltParticle.isPlaying) smeltParticle.Play();
 
             if (_smeltedFor > smeltTime)
