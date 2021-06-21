@@ -1,18 +1,23 @@
 using System;
 using Runtime.Movables;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SmeltableBlock : MonoBehaviour, IBlock
 {
     [SerializeField, Range(2, 10)] private float requiredPlayerSmeltRange;
     [SerializeField] private float smeltTime = 2f;
     [SerializeField] private ParticleSystem smeltParticle;
+    [SerializeField] private GameObject meltSoundObject;
     [NonSerialized] public bool forceSmelt = false;
 
+    public UnityEvent onBlockMeltComplete = new UnityEvent();
+    
     private GameObject _player;
     private float _smeltedFor;
     private Animator _animator;
     private TorchPower _torchPower;
+    private AudioSource _meltSoundSource;
 
 
     private static readonly int Smelting = Animator.StringToHash("Smelting");
@@ -23,6 +28,9 @@ public class SmeltableBlock : MonoBehaviour, IBlock
         _player = GameObject.FindGameObjectWithTag("Player");
         _animator = GetComponent<Animator>();
         _torchPower = FindObjectOfType<TorchPower>();
+        
+        meltSoundObject.transform.parent = null;
+        _meltSoundSource = meltSoundObject.GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -33,16 +41,19 @@ public class SmeltableBlock : MonoBehaviour, IBlock
             _animator.SetBool(Smelting, true);
             _smeltedFor += Time.deltaTime;
             if (!smeltParticle.isPlaying) smeltParticle.Play();
+            if (!_meltSoundSource.isPlaying) _meltSoundSource.Play();
 
             if (_smeltedFor > smeltTime)
             {
                 OnUpdate();
+                onBlockMeltComplete?.Invoke();
                 Destroy(this.gameObject);
             }
         }
         else
         {
             smeltParticle.Stop();
+            if (_meltSoundSource.clip != null) _meltSoundSource.Stop();
             _animator.SetBool(Smelting, false);
         }
     }
@@ -58,4 +69,9 @@ public class SmeltableBlock : MonoBehaviour, IBlock
         GameControl.Instance.BlockUpdateNextFrame();
     }
 
+
+    private void OnDestroy()
+    {
+        
+    }
 }
