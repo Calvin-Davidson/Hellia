@@ -15,7 +15,7 @@ public class SmeltableBlock : MonoBehaviour, IBlock
     
     private GameObject _player;
     private float _smeltedFor;
-    private Animator _animator;
+    private MeshMorphingDynamic _meshMorphingDynamic;
     private TorchPower _torchPower;
     private AudioSource _meltSoundSource;
 
@@ -26,20 +26,25 @@ public class SmeltableBlock : MonoBehaviour, IBlock
     private void Awake()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
-        _animator = GetComponent<Animator>();
+        _meshMorphingDynamic = GetComponentInChildren<MeshMorphingDynamic>();
         _torchPower = FindObjectOfType<TorchPower>();
-        
+       
         meltSoundObject.transform.parent = null;
         _meltSoundSource = meltSoundObject.GetComponent<AudioSource>();
-    }
+  }
+
+
 
     private void Update()
     {
         float distance = Vector3.Distance(transform.position, _player.transform.position);
         if ((distance < requiredPlayerSmeltRange && Input.GetKey(KeyCode.E) && _torchPower.IsBurning()) || forceSmelt)
         {
-            _animator.SetBool(Smelting, true);
+
+            _meshMorphingDynamic.StartUpdating();
+            _meshMorphingDynamic.UnPauseUpdating();
             _smeltedFor += (forceSmelt) ? Time.deltaTime * ForceSmeltMultiplier : Time.deltaTime;
+
             if (!smeltParticle.isPlaying) smeltParticle.Play();
             if (!_meltSoundSource.isPlaying) _meltSoundSource.Play();
 
@@ -53,8 +58,8 @@ public class SmeltableBlock : MonoBehaviour, IBlock
         else
         {
             smeltParticle.Stop();
+            _meshMorphingDynamic.PauseUpdating();
             if (_meltSoundSource.clip != null) _meltSoundSource.Stop();
-            _animator.SetBool(Smelting, false);
         }
     }
 
