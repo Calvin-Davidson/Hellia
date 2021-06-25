@@ -20,6 +20,8 @@ namespace Runtime.Movables
         [SerializeField] private ParticleSystem holePartice;
         public bool canBePushed = true;
 
+        public UnityEvent onBlockFallComplete = new UnityEvent();
+
 
         private const float RotationTolerance = 20;
      
@@ -177,7 +179,11 @@ namespace Runtime.Movables
 
             if (isFree || new FallableBlock().CheckShouldFall(transform)) 
             {
-                StartCoroutine(MoveObjectOverTime(gameObject, transform.position + new Vector3(0, -holeDistance, 0), holePartice.Play));
+                StartCoroutine(MoveObjectOverTime(gameObject, transform.position + new Vector3(0, -holeDistance, 0), () =>
+                {
+                    holePartice.Play();
+                    onBlockFallComplete?.Invoke();
+                }));
             }
 
             GameControl.Instance.onBlockUpdate?.Invoke();

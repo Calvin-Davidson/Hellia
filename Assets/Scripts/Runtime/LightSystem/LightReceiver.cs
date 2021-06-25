@@ -7,11 +7,12 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Runtime.Movables;
+
 public class LightReceiver : MonoBehaviour, ILightReceiver
 {
     [SerializeField] private GameObject beamPrefab;
     [SerializeField] private LayerMask playerLayerMask;
-    
+
     [Space] [SerializeField] private bool beamForward;
     [SerializeField] private bool beamBackward;
     [SerializeField] private bool beamLeft;
@@ -22,7 +23,7 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
     [SerializeField] private GameObject left;
     [SerializeField] private GameObject right;
 
-    [SerializeField]private bool debug = false;
+    [SerializeField] private bool debug = false;
 
     private List<ILightComponent> sendingTo = new List<ILightComponent>();
     private ILightComponent receivingFrom;
@@ -30,12 +31,12 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
     public void LightReceive(ILightComponent lightComponent)
     {
         if (receivingFrom != null && receivingFrom != lightComponent) return;
-        Vector3 dir = (lightComponent.GetGameObject().transform.position- transform.position).normalized;
-        
+        Vector3 dir = (lightComponent.GetGameObject().transform.position - transform.position).normalized;
+
         List<ILightComponent> prevSendingTo = new List<ILightComponent>();
         sendingTo.ForEach(component => prevSendingTo.Add(component));
         sendingTo.Clear();
-        
+
         if (dir.Equals(Vector3.right) && beamRight)
             FixReceiverBeams(right);
         if (dir.Equals(Vector3.forward) && beamForward)
@@ -46,7 +47,7 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
             FixReceiverBeams(left);
 
         this.receivingFrom = lightComponent;
-        
+
         prevSendingTo.ForEach(component =>
         {
             if (!sendingTo.Contains(component))
@@ -63,9 +64,14 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         });
         foreach (var component in sendingTo)
         {
-            if (!IsLightReceiver(component)) continue;
-            ILightReceiver receiver = (ILightReceiver)component;
-            receiver.LightDisconnect(this);
+            try
+            {
+                ILightReceiver receiver = (ILightReceiver) component;
+                receiver.LightReceive(this);
+            }
+            catch (InvalidCastException e)
+            {
+            }
         }
     }
 
@@ -82,7 +88,6 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
 
         if (backward != null && receivedFromBeam != backward)
             FixBeamSize(backward);
-        
     }
 
     public void LightDisconnect(ILightComponent lightComponent)
@@ -95,13 +100,19 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         if (backward) backward.transform.localScale = beamScale;
         if (left) left.transform.localScale = beamScale;
         if (right) right.transform.localScale = beamScale;
-        
+
         foreach (var component in sendingTo)
         {
-            if (!IsLightReceiver(component)) continue;
+            try
+            {
                 ILightReceiver receiver = (ILightReceiver) component;
                 receiver.LightDisconnect(this);
+            }
+            catch (InvalidCastException e)
+            {
+            }
         }
+
         sendingTo.Clear();
     }
 
@@ -116,7 +127,8 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         RaycastHit closest = hits[0];
         foreach (RaycastHit hit in hits)
         {
-            if (Vector3.Distance(hit.point, beam.transform.position) < Vector3.Distance(beam.transform.position, closest.point))
+            if (Vector3.Distance(hit.point, beam.transform.position) <
+                Vector3.Distance(beam.transform.position, closest.point))
             {
                 closest = hit;
             }
@@ -131,7 +143,8 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         if (closest.collider.gameObject.TryGetComponent(out SmeltableBlock smeltableBlock))
         {
             smeltableBlock.forceSmelt = true;
-            if (closest.collider.gameObject.TryGetComponent(out MovableBlock movableBlock)) movableBlock.canBePushed = false;
+            if (closest.collider.gameObject.TryGetComponent(out MovableBlock movableBlock))
+                movableBlock.canBePushed = false;
         }
 
         if (debug)
@@ -153,23 +166,10 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         beam.transform.localScale = currentScale;
     }
 
-    private bool IsLightReceiver(ILightComponent component)
-    {
-        try
-        {
-            ILightReceiver receiver = (ILightReceiver)component;
-            return true;
-        }
-        catch (InvalidCastException)
-        {
-            return false;
-        }
-    }
 
+    #region Editor methodes
 
-#region Editor methodes
 #if (UNITY_EDITOR)
-
     public void InstantiateBeams()
     {
         Debug.Log("generating beams");
@@ -199,7 +199,8 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
     }
 
 #endif
-#endregion
+
+    #endregion
 
     public GameObject GetGameObject()
     {
