@@ -36,11 +36,14 @@ public class MeshMorphingDynamic : MonoBehaviour
 	float[] m_LastWeights;
 	public bool m_GenerateNormals;
 	[SerializeField] private float[] startWeights;
+	[SerializeField] private float[] midWeights;
 	[SerializeField] private float[] endWeights;
 	[SerializeField] private float lerpSpeed = 1f;
 	[SerializeField] private float maxDifference = 0.1f;
 	float t;
+	float t2;
 	bool doneUpdating = false;
+	bool isPaused = false;
 	bool isUpdating = false;
 	float[] currentWeights;
 	//You could add more than just one morp target! Just add the meshes and additional parameters and notice the example below.
@@ -97,16 +100,36 @@ public class MeshMorphingDynamic : MonoBehaviour
 	{
 		isUpdating = true;
 	}
+	public void PauseUpdating()
+	{
+		isPaused = true;
+	}
+	public void UnPauseUpdating()
+	{
+		isPaused = false;
+	}
 	void DynamicUpdate()
 	{
 		if (doneUpdating)
 		{
 			return;
 		}
+		if (isPaused)
+		{
+			return;
+		}
+		t2 = t * 2;
 		bool update = false;
 		for (int i = 0; i < startWeights.Length; i++)
 		{
-			currentWeights[i] = Mathf.Lerp(startWeights[i], endWeights[i], t);
+			if(t < 0.5f)
+			{
+				currentWeights[i] = Mathf.Lerp(startWeights[i], midWeights[i], t2);
+			}
+			if(t >= 0.5f)
+			{
+				currentWeights[i] = Mathf.Lerp(midWeights[i], endWeights[i], (t2-1));
+			}
 			if(Mathf.Abs(m_LastWeights[i] - currentWeights[i]) > maxDifference)
 			{
 				m_LastWeights[i] = currentWeights[i];
@@ -120,7 +143,8 @@ public class MeshMorphingDynamic : MonoBehaviour
 				doneUpdating = true;
 			}
 		}
-		t += lerpSpeed * Time.deltaTime;
+		if (!isPaused)
+			t += lerpSpeed * Time.deltaTime;
 		if (update)
 			UpdateMorph();
 	}
