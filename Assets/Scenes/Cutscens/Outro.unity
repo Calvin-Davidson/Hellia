@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0.99999905, b: 0.99999905, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3440055898134006259, guid: cb82f15469379e149ab88d9878b590d2, type: 3}
       propertyPath: messages.Array.size
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3440055898134006259, guid: cb82f15469379e149ab88d9878b590d2, type: 3}
       propertyPath: messages.Array.data[0].message
@@ -144,16 +144,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3440055898134006259, guid: cb82f15469379e149ab88d9878b590d2, type: 3}
       propertyPath: messages.Array.data[1].message
-      value: After baldr's long journey he finally found the portal back to earth
+      value: At the end of his long journey
       objectReference: {fileID: 0}
     - target: {fileID: 3440055898134006259, guid: cb82f15469379e149ab88d9878b590d2, type: 3}
       propertyPath: messages.Array.data[2].message
-      value: He slowly opened his eyes and when he did he saw that he finally made
-        it back
+      value: Baldr found a large portal.
       objectReference: {fileID: 0}
     - target: {fileID: 3440055898134006259, guid: cb82f15469379e149ab88d9878b590d2, type: 3}
       propertyPath: messages.Array.data[3].message
-      value: and this is the end of Baldr's story.
+      value: After a bright flash, he opened his eyes
+      objectReference: {fileID: 0}
+    - target: {fileID: 3440055898134006259, guid: cb82f15469379e149ab88d9878b590d2, type: 3}
+      propertyPath: messages.Array.data[4].message
+      value: ' There it was. Earth.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3440055898134006259, guid: cb82f15469379e149ab88d9878b590d2, type: 3}
+      propertyPath: messages.Array.data[5].message
+      value: ' He had gone to hell, and now, he was back.'
       objectReference: {fileID: 0}
     - target: {fileID: 3440055898134006259, guid: cb82f15469379e149ab88d9878b590d2, type: 3}
       propertyPath: messages.Array.data[0].displayFor
@@ -161,15 +168,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3440055898134006259, guid: cb82f15469379e149ab88d9878b590d2, type: 3}
       propertyPath: messages.Array.data[1].displayFor
-      value: 8.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3440055898134006259, guid: cb82f15469379e149ab88d9878b590d2, type: 3}
       propertyPath: messages.Array.data[2].displayFor
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3440055898134006259, guid: cb82f15469379e149ab88d9878b590d2, type: 3}
       propertyPath: messages.Array.data[3].displayFor
-      value: 6
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3440055898134006259, guid: cb82f15469379e149ab88d9878b590d2, type: 3}
+      propertyPath: messages.Array.data[4].displayFor
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3440055898134006259, guid: cb82f15469379e149ab88d9878b590d2, type: 3}
+      propertyPath: messages.Array.data[5].displayFor
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3440055898134006260, guid: cb82f15469379e149ab88d9878b590d2, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3440055898134006262, guid: cb82f15469379e149ab88d9878b590d2, type: 3}
       propertyPath: m_Pivot.x
@@ -277,7 +296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4788939472958911798, guid: cb82f15469379e149ab88d9878b590d2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 43
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb82f15469379e149ab88d9878b590d2, type: 3}
