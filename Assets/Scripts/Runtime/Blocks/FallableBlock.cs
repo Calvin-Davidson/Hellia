@@ -7,7 +7,7 @@ public class FallableBlock
    public bool CheckShouldFall(Transform transform)
     {
         RaycastHit[] hits = new RaycastHit[10];
-        int collideCount = Physics.RaycastNonAlloc(transform.position, new Vector3(0, -10, 0), hits, 10f);
+        Physics.RaycastNonAlloc(transform.position, new Vector3(0, -10, 0), hits, 10f);
 
         float closestDistance = 100000.0f;
 
@@ -18,7 +18,7 @@ public class FallableBlock
             if (Vector3.Distance(hits[i].collider.gameObject.transform.position, transform.position) < closestDistance)
                 closestDistance = Vector3.Distance(hits[i].collider.gameObject.transform.position, transform.position);
         }
-
-        return (closestDistance > 2.5f);
+        
+        return (closestDistance > 4f);
     }
 }
