@@ -106,34 +106,10 @@ MonoBehaviour:
   tileSize: 4
   onTorchRefuel:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6034001719268677218}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
   onTorchDeplete:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6034001719268677218}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!54 &4075411399641005456
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1319,11 +1295,6 @@ GameObject:
 --- !u!4 &3234069908149101800 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f71001fa848b87949809a4fe45f3cc89, type: 3}
-  m_PrefabInstance: {fileID: 3128594431246893827}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6034001719268677218 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -516202467648105119, guid: f71001fa848b87949809a4fe45f3cc89, type: 3}
   m_PrefabInstance: {fileID: 3128594431246893827}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4633021966380684478
