@@ -21,20 +21,26 @@ public class LevelGridSpawner : MonoBehaviour
     public void Generate()
     {
         if (gameObjects != null)
-        {
-            foreach (GameObject gameObject in gameObjects)
-            {
-                if (gameObject != null)
-                {
-                    DestroyImmediate(gameObject);
-                }
-            }
-            gameObjects.Clear();
-        } 
+            ClearOldGameObjects();
         else
-        {
             gameObjects = new List<GameObject>();
+
+        InstantiateFloor();
+        if (spawnWalls) SpawnWalls();
+        
+    }
+
+    private void ClearOldGameObjects()
+    {
+        foreach (GameObject oldObject in gameObjects)
+        {
+            if (oldObject != null) DestroyImmediate(oldObject);
         }
+        gameObjects.Clear();
+    }
+
+    private void InstantiateFloor()
+    {
         this.transform.position = new Vector3(0, 0, 0);
         for (int x = 0; x < length; x++)
         {
@@ -46,32 +52,33 @@ public class LevelGridSpawner : MonoBehaviour
                 newObject.transform.position = location;
                 newObject.transform.localScale = new Vector3(tileSize, 1, tileSize);
                 newObject.transform.parent = this.transform;
-                Debug.Log(newObject);
                 gameObjects.Add(newObject);
             }
         }
-        if (spawnWalls)
-        {   
-            Vector3 wallLocation = location;
-            wallLocation.y += wallOffset;
-            for (int x = 0; x < length; x++)
+    }
+
+    private void SpawnWalls()
+    {
+        Vector3 wallLocation = location;
+        wallLocation.y += wallOffset;
+        for (int x = 0; x < length; x++)
+        {
+            wallLocation.x = x * tileSize;
+            for (int y = 0; y < width; y++)
             {
-                wallLocation.x = x * tileSize;
-                for (int y = 0; y < width; y++)
+                wallLocation.z = y * tileSize;
+                if(x == 0 || x == length - 1 || y == 0 || y == width - 1)
                 {
-                    wallLocation.z = y * tileSize;
-                    if(x == 0 || x == length - 1 || y == 0 || y == width - 1)
-                    {
-                        GameObject newObject = (GameObject) PrefabUtility.InstantiatePrefab(wall as Object);
-                        newObject.transform.position = wallLocation;
-                        newObject.transform.localScale = wallSize;
-                        newObject.transform.parent = this.transform;
-                        gameObjects.Add(newObject);
-                    }
+                    GameObject newObject = (GameObject) PrefabUtility.InstantiatePrefab(wall as Object);
+                    newObject.transform.position = wallLocation;
+                    newObject.transform.localScale = wallSize;
+                    newObject.transform.parent = this.transform;
+                    gameObjects.Add(newObject);
                 }
             }
         }
     }
+    
     public void PlaceWall()
     {
         Vector3 location = new Vector3(0, 0, 0);
