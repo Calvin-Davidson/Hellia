@@ -14,10 +14,13 @@ public class TorchPower : MonoBehaviour
     
     private TorchChargingStation[] _chargingStations;
     private float _currentTorchCharge;
+    private Animator _animator;
+    private static readonly int HasTorch = Animator.StringToHash("HasTorch");
 
     private void Awake()
     {
         _chargingStations = FindObjectsOfType<TorchChargingStation>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -26,11 +29,15 @@ public class TorchPower : MonoBehaviour
         _currentTorchCharge -= Time.deltaTime;
 
         if (_currentTorchCharge < 0 && previousCharge >= 0)
+        {
             onTorchDeplete?.Invoke();
+            _animator.SetBool(HasTorch, false);
+        }
 
         if (IsInChargeStationTile() && Input.GetKey(KeyCode.E))
         {
             _currentTorchCharge = burnDuration;
+            _animator.SetBool(HasTorch, true);
             onTorchRefuel?.Invoke();
         }
         
