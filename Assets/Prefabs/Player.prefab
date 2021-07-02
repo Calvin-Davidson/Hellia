@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 475290d126cf7eb4189f667480436cf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeMaterial: {fileID: 2100000, guid: eaecbe7793532fa48abef4c73654d2ab, type: 2}
+  activeMaterial: {fileID: 2100000, guid: d718cc868fba9564b930f479df4cedeb, type: 2}
   inactiveMaterial: {fileID: 2100000, guid: b0087e1281674b44581c8ac5427598ab, type: 2}
 --- !u!1 &525297490387082376
 GameObject:
@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 475290d126cf7eb4189f667480436cf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeMaterial: {fileID: 2100000, guid: eaecbe7793532fa48abef4c73654d2ab, type: 2}
+  activeMaterial: {fileID: 2100000, guid: d718cc868fba9564b930f479df4cedeb, type: 2}
   inactiveMaterial: {fileID: 2100000, guid: b0087e1281674b44581c8ac5427598ab, type: 2}
 --- !u!82 &5564816596240518525
 AudioSource:
@@ -454,7 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 475290d126cf7eb4189f667480436cf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeMaterial: {fileID: 2100000, guid: eaecbe7793532fa48abef4c73654d2ab, type: 2}
+  activeMaterial: {fileID: 2100000, guid: d718cc868fba9564b930f479df4cedeb, type: 2}
   inactiveMaterial: {fileID: 2100000, guid: b0087e1281674b44581c8ac5427598ab, type: 2}
 --- !u!114 &1165636062610428536
 MonoBehaviour:
@@ -468,7 +468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 475290d126cf7eb4189f667480436cf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeMaterial: {fileID: 2100000, guid: eaecbe7793532fa48abef4c73654d2ab, type: 2}
+  activeMaterial: {fileID: 2100000, guid: d718cc868fba9564b930f479df4cedeb, type: 2}
   inactiveMaterial: {fileID: 2100000, guid: b0087e1281674b44581c8ac5427598ab, type: 2}
 --- !u!1001 &3128594431246893827
 PrefabInstance:
