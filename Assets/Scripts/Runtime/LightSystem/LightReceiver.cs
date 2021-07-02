@@ -37,13 +37,15 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         sendingTo.ForEach(component => prevSendingTo.Add(component));
         sendingTo.Clear();
 
-        if (dir.Equals(Vector3.right) && beamRight)
+        Debug.Log(dir + "   " + Vector3.left);
+        Debug.Log((CompareVector(Vector3.left, dir) + "  " + beamLeft));
+        if (CompareVector(dir, Vector3.right) && beamRight)
             FixReceiverBeams(right);
-        if (dir.Equals(Vector3.forward) && beamForward)
+        if (CompareVector(dir, Vector3.forward) && beamForward)
             FixReceiverBeams(forward);
-        if (dir.Equals(Vector3.back) && beamBackward)
+        if (CompareVector(dir, Vector3.back) && beamBackward)
             FixReceiverBeams(backward);
-        if (dir.Equals(Vector3.left) && beamLeft)
+        if (CompareVector(dir, Vector3.left) && beamLeft)
             FixReceiverBeams(left);
 
         this.receivingFrom = lightComponent;
@@ -164,6 +166,11 @@ public class LightReceiver : MonoBehaviour, ILightReceiver
         Vector3 currentScale = beam.transform.localScale;
         currentScale.y = distance / transform.localScale.z / 2;
         beam.transform.localScale = currentScale;
+    }
+
+    private bool CompareVector(Vector3 a, Vector3 b)
+    {
+        return Vector3.Distance(a, b) < 0.1f;
     }
 
 
