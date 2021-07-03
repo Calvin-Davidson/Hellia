@@ -111,10 +111,10 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     - _desaturate: 1
-    - _desaturationBrightness: 0.000011425316
+    - _desaturationBrightness: 0.000024485587
     - _desaturationStrength: 0
-    - _maskIntensity: 0.0001757741
-    - _overlayIntensity: 0.0001757741
+    - _maskIntensity: 0.00037670135
+    - _overlayIntensity: 0.00037670135
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
