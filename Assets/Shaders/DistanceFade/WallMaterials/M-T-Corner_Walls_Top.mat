@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Corner_Wall_Top
+  m_Name: M-T-Corner_Walls_Top
   m_Shader: {fileID: -6465566751694194690, guid: f52ebe50e2fd4ca4c8e7c12dfc58730f, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -33,11 +33,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_01f0b3f5f9c84cdd8be7846d7417901f:
-        m_Texture: {fileID: 2800000, guid: 1d0be88ff4725964ea1fc082811f078d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6dd01c67498adc4428c494728121e8ff, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_2228930ecd72403d912b68e9a4379d08:
-        m_Texture: {fileID: 2800000, guid: 1d0be88ff4725964ea1fc082811f078d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6dd01c67498adc4428c494728121e8ff, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_8f7b1bb18f5c4598859685a627c81d43:
@@ -45,7 +45,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_acd3dc709a9c416b851ca79ad70b421f:
-        m_Texture: {fileID: 2800000, guid: 1d0be88ff4725964ea1fc082811f078d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6dd01c67498adc4428c494728121e8ff, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
