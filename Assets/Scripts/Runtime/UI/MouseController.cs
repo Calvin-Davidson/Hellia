@@ -14,7 +14,7 @@ public class MouseController : MonoBehaviour
 
     public void HideMouse()
     {
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
