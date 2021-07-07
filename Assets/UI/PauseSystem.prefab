@@ -238,6 +238,7 @@ GameObject:
   - component: {fileID: 2557154269331363594}
   - component: {fileID: 2557154269331363595}
   - component: {fileID: 6251089517586141378}
+  - component: {fileID: 5761661853987921151}
   m_Layer: 5
   m_Name: PauseSystem
   m_TagString: Untagged
@@ -345,6 +346,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 624bc2aa2c6117e4383df6b0b7ad7940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onPause:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5761661853987921151}
+        m_TargetAssemblyTypeName: MouseController, Assembly-CSharp
+        m_MethodName: ShowMouse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onUnpause:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5761661853987921151}
+        m_TargetAssemblyTypeName: MouseController, Assembly-CSharp
+        m_MethodName: HideMouse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5761661853987921151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2557154269331363596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d44976ea34ce7409ce25afd285f6b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hideOnEnable: 1
 --- !u!1 &4449718123114758987
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,6 +1231,10 @@ PrefabInstance:
       propertyPath: m_fontColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 445520106772172802, guid: 202c6353157c2fe45a376a1b127840f5, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 8260408419256330070, guid: 202c6353157c2fe45a376a1b127840f5, type: 3}
       propertyPath: m_fontColor.b
       value: 1
@@ -1199,6 +1247,10 @@ PrefabInstance:
       propertyPath: m_fontColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8260408419256330070, guid: 202c6353157c2fe45a376a1b127840f5, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 8260408419272931495, guid: 202c6353157c2fe45a376a1b127840f5, type: 3}
       propertyPath: m_fontColor.b
       value: 1
@@ -1210,6 +1262,10 @@ PrefabInstance:
     - target: {fileID: 8260408419272931495, guid: 202c6353157c2fe45a376a1b127840f5, type: 3}
       propertyPath: m_fontColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8260408419272931495, guid: 202c6353157c2fe45a376a1b127840f5, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 8260408419777563238, guid: 202c6353157c2fe45a376a1b127840f5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1366,6 +1422,10 @@ PrefabInstance:
     - target: {fileID: 8260408420358725059, guid: 202c6353157c2fe45a376a1b127840f5, type: 3}
       propertyPath: m_fontColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8260408420358725059, guid: 202c6353157c2fe45a376a1b127840f5, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 8260408420840431632, guid: 202c6353157c2fe45a376a1b127840f5, type: 3}
       propertyPath: m_Name
