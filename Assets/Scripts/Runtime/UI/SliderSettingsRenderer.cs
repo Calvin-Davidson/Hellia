@@ -17,6 +17,16 @@ public class SliderSettingsRenderer : MonoBehaviour
 
     private void Start()
     {
+        Render();
+    }
+
+    private void OnEnable()
+    {
+        Render();
+    }
+
+    public void Render()
+    {
         slider.value = PlayerPrefs.GetFloat(settingType.ToString());
     }
 }
