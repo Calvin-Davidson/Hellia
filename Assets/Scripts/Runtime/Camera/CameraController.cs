@@ -7,7 +7,7 @@ using Runtime.Player;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform target;
-    [SerializeField] private float rotationSpeed;
+    [SerializeField] private float rotationSpeed = 250.0f;
     [SerializeField] private float lookXSensitivity = 2;
     [SerializeField] private float lookYSensitivity = 1.5f;
     [SerializeField] private float zoomSensitivity = 3;
@@ -40,8 +40,8 @@ public class CameraController : MonoBehaviour
 
         CameraZoom(offset, offsetLength);
 
-        float horizontal = Input.GetAxis("Mouse X") * lookXSensitivity;
-        float vertical = Mathf.Clamp(-Input.GetAxis("Mouse Y") * lookYSensitivity, -3f, 3f);
+        float horizontal = Input.GetAxis("Mouse X") * UserSettings.lookXSensitivity;
+        float vertical = Mathf.Clamp(-Input.GetAxis("Mouse Y") * UserSettings.lookYSensitivity, -3f, 3f);
         float angle = transform.rotation.eulerAngles.x;
 
         if (angle > 60)
@@ -54,8 +54,8 @@ public class CameraController : MonoBehaviour
         }
 
         transform.LookAt(target);
-        transform.RotateAround (target.position,new Vector3(0.0f,1.0f,0.0f),horizontal * Time.deltaTime * rotationSpeed);
-        transform.RotateAround(target.position, axis, vertical * Time.deltaTime * rotationSpeed);
+        transform.RotateAround (target.position,new Vector3(0.0f,1.0f,0.0f),horizontal * Time.deltaTime * UserSettings.CameraRotationSpeed);
+        transform.RotateAround(target.position, axis, vertical * Time.deltaTime * UserSettings.CameraRotationSpeed);
     }
 
 
@@ -64,6 +64,6 @@ public class CameraController : MonoBehaviour
         float CameraInput = -Input.GetAxis("Mouse ScrollWheel");
         if (CameraInput < 0 && offsetLength < minZoom) CameraInput = 0;
         if (CameraInput > 0 && offsetLength > maxZoom) CameraInput = 0;
-        transform.position += offset * CameraInput * zoomSensitivity;
+        transform.position += offset * (CameraInput * UserSettings.cameraZoomSensitivity);
     }
 }
