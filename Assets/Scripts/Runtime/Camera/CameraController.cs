@@ -40,8 +40,8 @@ public class CameraController : MonoBehaviour
 
         CameraZoom(offset, offsetLength);
 
-        float horizontal = Input.GetAxis("Mouse X") * UserSettings.lookXSensitivity;
-        float vertical = Mathf.Clamp(-Input.GetAxis("Mouse Y") * UserSettings.lookYSensitivity, -3f, 3f);
+        float horizontal = Input.GetAxis("Mouse X") * UserSettings.LookXSensitivity;
+        float vertical = Mathf.Clamp(-Input.GetAxis("Mouse Y") * UserSettings.LookYSensitivity, -3f, 3f);
         float angle = transform.rotation.eulerAngles.x;
 
         if (angle > 60)
@@ -64,6 +64,6 @@ public class CameraController : MonoBehaviour
         float CameraInput = -Input.GetAxis("Mouse ScrollWheel");
         if (CameraInput < 0 && offsetLength < minZoom) CameraInput = 0;
         if (CameraInput > 0 && offsetLength > maxZoom) CameraInput = 0;
-        transform.position += offset * (CameraInput * UserSettings.cameraZoomSensitivity);
+        transform.position += offset * (CameraInput * UserSettings.CameraZoomSensitivity);
     }
 }
