@@ -1955,7 +1955,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Wessel
+  m_Text: Wessel Cramer
 --- !u!222 &375971891
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4202,7 +4202,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Joyce
+  m_Text: Joyce Tesselaar
 --- !u!222 &1113160124
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5313,7 +5313,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Eva
+  m_Text: Eva Pols
 --- !u!222 &1395643362
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7044,7 +7044,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Milou
+  m_Text: Milou Martin
 --- !u!222 &1856474315
 CanvasRenderer:
   m_ObjectHideFlags: 0
