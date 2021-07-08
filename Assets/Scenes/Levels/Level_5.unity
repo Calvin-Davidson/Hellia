@@ -7884,11 +7884,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6426961108767637938, guid: abeab709dd9c67e469a381b959af8862, type: 3}
       propertyPath: sceneName
-      value: Level_7
+      value: Level_6
       objectReference: {fileID: 0}
     - target: {fileID: 6426961108767637939, guid: abeab709dd9c67e469a381b959af8862, type: 3}
       propertyPath: sceneName
-      value: Level_6
+      value: Level_5
       objectReference: {fileID: 0}
     - target: {fileID: 6426961108767637949, guid: abeab709dd9c67e469a381b959af8862, type: 3}
       propertyPath: m_RootOrder
@@ -9700,6 +9700,10 @@ Transform:
   - {fileID: 1041181646}
   - {fileID: 1341847205}
   - {fileID: 658070093}
+  - {fileID: 260736282}
+  - {fileID: 1741096919}
+  - {fileID: 603236025}
+  - {fileID: 1815422176}
   - {fileID: 2077690196}
   - {fileID: 1361948211}
   - {fileID: 686539005}
@@ -9720,10 +9724,6 @@ Transform:
   - {fileID: 707120671}
   - {fileID: 1195294208}
   - {fileID: 2096455569}
-  - {fileID: 260736282}
-  - {fileID: 1741096919}
-  - {fileID: 603236025}
-  - {fileID: 1815422176}
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
