@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
@@ -28,6 +29,8 @@ namespace Runtime.Movables
         private const int MoveDistance = 4;
         private const int holeDistance = 4;
         private const String HoleLayerName = "Hole";
+
+        private GameObject _movableOnTop = null;
 
 
         private void TryPushTo(Vector3 direction, GameObject collidedObject)
@@ -196,6 +199,8 @@ namespace Runtime.Movables
 
         private IEnumerator MoveObjectOverTime(GameObject target, Vector3 newPosition, Action onComplete)
         {
+            CheckMovableOnTop();
+            
             GameControl.Instance.onBlockUpdate?.Invoke();
             float percent = 0f;
             Vector3 startPosition = target.transform.position;
@@ -208,12 +213,29 @@ namespace Runtime.Movables
                 GameControl.Instance.onBlockUpdate?.Invoke();
 
                 target.transform.position = Vector3.Lerp(startPosition, newPosition, percent);
+                if (_movableOnTop) _movableOnTop.transform.position = target.transform.position + new Vector3(0, holeDistance, 0);
                 yield return null;
             }
             
             
             GameControl.Instance.onBlockUpdate?.Invoke();
             onComplete?.Invoke();
+        }
+
+        private void CheckMovableOnTop()
+        {
+            RaycastHit[] results = new RaycastHit[10]; 
+            Physics.RaycastNonAlloc(transform.position, Vector3.up, results, Mathf.Infinity);
+
+            foreach (var raycastHit in results)
+            {
+                if (raycastHit.collider == null || raycastHit.collider.gameObject == null) return;
+                if (raycastHit.collider.gameObject.GetComponent<MovableBlock>() != null)
+                {
+                    _movableOnTop = raycastHit.collider.gameObject;
+                    return;
+                }
+            }
         }
     }
 }
