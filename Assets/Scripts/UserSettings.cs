@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class UserSettings : MonoBehaviour
 {
-    public const float CameraRotationSpeed = 250.0f;
+    public const float CameraRotationSpeed = 50.0f;
     
     private static float lookXSensitivity = 2.0f;
     private static float lookYSensitivity = 1.5f;
